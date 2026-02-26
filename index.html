@@ -4,287 +4,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOTO 10 | Próximamente</title>
+    <title>Daniel Hornos | Portafolio Personal</title>
 
     <!-- Fuentes Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <style>
-        :root {
-            --neon-blue: #00f3ff;
-            --neon-purple: #bc13fe;
-            --dark-bg: #050510;
-            --grid-color: rgba(0, 243, 255, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--dark-bg);
-            color: #fff;
-            font-family: 'Rajdhani', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Fondo de cuadrícula futurista animada */
-        .cyber-grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 200vw;
-            height: 200vh;
-            background-image:
-                linear-gradient(var(--grid-color) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 50px 50px;
-            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
-            animation: gridMove 20s linear infinite;
-            z-index: 1;
-            opacity: 0.5;
-        }
-
-        @keyframes gridMove {
-            0% {
-                transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px);
-            }
-
-            100% {
-                transform: perspective(500px) rotateX(60deg) translateY(50px) translateZ(-200px);
-            }
-        }
-
-        /* Efecto de viñeta para centrar la atención */
-        .vignette {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, transparent 30%, var(--dark-bg) 80%);
-            z-index: 2;
-        }
-
-        /* Contenedor Principal */
-        .content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 2rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(0, 243, 255, 0.2);
-            border-radius: 20px;
-            background: linear-gradient(135deg, rgba(5, 5, 16, 0.8) 0%, rgba(20, 20, 40, 0.6) 100%);
-            box-shadow: 0 0 40px rgba(0, 243, 255, 0.1);
-            max-width: 600px;
-            width: 90%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-15px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        /* Título Principal */
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 900;
-            margin-bottom: 0.5rem;
-            letter-spacing: 5px;
-            color: #fff;
-            text-transform: uppercase;
-            text-shadow:
-                0 0 10px var(--neon-blue),
-                0 0 20px var(--neon-blue),
-                0 0 40px var(--neon-blue);
-            animation: glitch 3s infinite;
-        }
-
-        /* Subtítulo */
-        h2 {
-            font-size: 1.5rem;
-            letter-spacing: 8px;
-            color: #aaa;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding-bottom: 1rem;
-        }
-
-        /* Etiqueta Próximamente */
-        .status-badge {
-            display: inline-block;
-            background: rgba(188, 19, 254, 0.1);
-            color: var(--neon-purple);
-            border: 1px solid var(--neon-purple);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 3rem;
-            box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);
-            }
-
-            50% {
-                box-shadow: 0 0 30px rgba(188, 19, 254, 0.6);
-            }
-
-            100% {
-                box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);
-            }
-        }
-
-        /* Botón Cyberpunk */
-        .cyber-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: transparent;
-            color: var(--neon-blue);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-decoration: none;
-            padding: 1rem 2.5rem;
-            border: 2px solid var(--neon-blue);
-            border-radius: 4px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-        }
-
-        .cyber-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.4), transparent);
-            transition: all 0.4s ease;
-        }
-
-        .cyber-button:hover {
-            background: rgba(0, 243, 255, 0.1);
-            box-shadow: 0 0 20px var(--neon-blue), inset 0 0 10px var(--neon-blue);
-            text-shadow: 0 0 5px var(--neon-blue);
-        }
-
-        .cyber-button:hover::before {
-            left: 100%;
-        }
-
-        .icon-target {
-            font-size: 1.5rem;
-        }
-
-        /* Glitch Effect */
-        @keyframes glitch {
-            0% {
-                transform: translate(0)
-            }
-
-            20% {
-                transform: translate(-2px, 2px)
-            }
-
-            40% {
-                transform: translate(-2px, -2px)
-            }
-
-            60% {
-                transform: translate(2px, 2px)
-            }
-
-            80% {
-                transform: translate(2px, -2px)
-            }
-
-            100% {
-                transform: translate(0)
-            }
-        }
-
-        /* Pantalla de ruido / CRT */
-        .scanlines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: linear-gradient(to bottom,
-                    rgba(255, 255, 255, 0),
-                    rgba(255, 255, 255, 0) 50%,
-                    rgba(0, 0, 0, 0.1) 50%,
-                    rgba(0, 0, 0, 0.1));
-            background-size: 100% 4px;
-            z-index: 20;
-            pointer-events: none;
-        }
-    </style>
+    <!-- CSS Propio -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-    <!-- Efectos visuales de fondo -->
-    <div class="cyber-grid"></div>
-    <div class="vignette"></div>
-    <div class="scanlines"></div>
 
-    <!-- Contenido Central -->
-    <main class="content">
-        <h1>GOTO 10</h1>
-        <h2>Página Personal</h2>
+    <!-- Navegación Superior -->
+    <nav>
+        <a href="#" class="logo">GOTO 10</a>
+        <div class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#tiro">Trayectoria Deportiva</a>
+            <a href="#proyectos">Desarrollo Web</a>
+        </div>
+    </nav>
 
-        <br>
-        <div class="status-badge">Próximamente</div>
-        <br>
+    <!-- Sección Hero (Inicio) -->
+    <header id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Daniel Hornos</h1>
+            <h2>Tirador Deportivo de Precisión</h2>
+            <p>Disciplina, enfoque y mejora continua en el más alto nivel competitivo del tiro deportivo nacional.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#tiro" class="cyber-btn">Ver Trayectoria</a>
+                <a href="#proyectos" class="cyber-btn accent">Ver Proyectos</a>
+            </div>
+        </div>
+    </header>
 
-        <p style="margin-bottom: 2rem; color: #888; font-size: 1.1rem;">
-            Sistema en construcción. Inicializando módulos...
-        </p>
+    <!-- Sección Tiro Deportivo (Timeline) -->
+    <section id="tiro">
+        <h2 class="section-title">Trayectoria en Tiro Deportivo</h2>
+        <div class="timeline-container">
+            <!-- Evento 1 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">09/02/2025</div>
+                    <h3>Capacitación Inicial</h3>
+                    <h4>Introducción al Tiro</h4>
+                    <p>Inicios formales en la disciplina como tirador deportivo, completando la capacitación teórica y
+                        práctica inicial.</p>
+                </div>
+            </div>
 
-        <!-- Botón de acceso al torneo -->
-        <a href="https://torneo2026.goto10.com.ar" class="cyber-button">
-            <span class="icon-target">🎯</span>
-            Ir a Torneo SITAS 2026
+            <!-- Evento 2 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">16/03/2025</div>
+                    <h3>Armamento</h3>
+                    <h4>Limpieza y Mantenimiento</h4>
+                    <p>Curso especializado en el mantenimiento de diferentes sistemas de armas, garantizando un
+                        funcionamiento seguro y confiable.</p>
+                </div>
+            </div>
+
+            <!-- Evento 3 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">13/04/2025</div>
+                    <h3>Clasificación y Deporte</h3>
+                    <h4>Tiro Deportivo</h4>
+                    <p>Curso avanzado sobre modalidades deportivas. Incluyó un mini-torneo integrador entre estudiantes.
+                        Logro: <strong>Puesto 2 🥈</strong>.</p>
+                </div>
+            </div>
+
+            <!-- Evento 4 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">25/05/2025</div>
+                    <h3>Torneo SITAS</h3>
+                    <h4>Debut Competitivo</h4>
+                    <p>Primer torneo oficial de precisión. Logro: <strong>Puesto 19 de 40</strong> participantes.</p>
+                </div>
+            </div>
+
+            <!-- Evento 5 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">02/08/2025</div>
+                    <h3>Torneo Quilmes</h3>
+                    <h4>Circuito Metropolitano</h4>
+                    <p>Participación en el polígono de Quilmes mejorando la consistencia. Logro: <strong>Puesto 25 de
+                            30</strong> participantes.</p>
+                </div>
+            </div>
+
+            <!-- Evento 6 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">17/08/2025</div>
+                    <h3>Torneo San Fernando</h3>
+                    <h4>Primer Podio Nacional</h4>
+                    <p>Excelente desempeño en precisión deportiva. Logro: <strong>Puesto 3 de 40 (Podio 🥉)</strong>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Evento 7 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">16/11/2025</div>
+                    <h3>Torneo San Fernando</h3>
+                    <h4>Mantenimiento de Nivel</h4>
+                    <p>Consolidación técnica en el circuito de San Fernando. Logro: <strong>Puesto 5 de 17</strong>
+                        participantes.</p>
+                </div>
+            </div>
+
+            <!-- Evento 8 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">20/12/2025</div>
+                    <h3>Torneo SITAS</h3>
+                    <h4>Doble Podio de Cierre</h4>
+                    <p>Cierre de año excepcional demostrando versatilidad en diferentes calibres ante 40 tiradores.
+                        Logro: <strong>Puesto 1 en 9mm 🥇 y Puesto 3 en .22LR 🥉</strong>.</p>
+                </div>
+            </div>
+
+            <!-- Evento 9 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">22/02/2026</div>
+                    <h3>Torneo San Fernando</h3>
+                    <h4>Apertura de Temporada</h4>
+                    <p>Inicio de la nueva temporada competitiva con solidez en el top 5. Logro: <strong>Puesto 3 de 25
+                            (Podio 🥉)</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Proyectos (Portafolio) -->
+    <section id="proyectos">
+        <h2 class="section-title">Desarrollos y Sistemas</h2>
+
+        <div class="projects-grid">
+
+            <!-- Proyecto SITAS -->
+            <div class="project-card">
+                <div class="project-img-placeholder">
+                    <span>SITAS 2026</span>
+                </div>
+                <div class="project-info">
+                    <h3>Plataforma Torneo SITAS</h3>
+                    <p>Desarrollo integral ad honorem del portal oficial web para el torneo de tiro del club SITAS.
+                        Incluye gestión de inscripciones, publicación de reglamentos y sistema de ranking en tiempo
+                        real, operando bajo un subdominio personalizado.</p>
+                    <a href="https://torneo2026.goto10.com.ar" target="_blank" class="cyber-btn">Ir al Torneo 🎯</a>
+                </div>
+            </div>
+
+            <!-- Proyecto PYAT -->
+            <div class="project-card">
+                <div class="project-img-placeholder">
+                    <span>PYAT ERP</span>
+                </div>
+                <div class="project-info">
+                    <h3>Ecosistema PYAT</h3>
+                    <p>Módulos de gestión empresarial corporativa desarrollados en Python. Integración de bases de datos
+                        centralizadas, facturación interactiva, seguimiento de cotizaciones y visualización modular de
+                        datos financieros.</p>
+                    <a href="#" class="cyber-btn"
+                        onclick="alert('Sistema de uso interno corporativo. Acceso restringido a capturas estáticas elegidas.'); return false;">Ver
+                        Galería Prev.</a>
+                </div>
+            </div>
+
+            <!-- Proyecto Extra / Futuro -->
+            <div class="project-card" style="opacity: 0.6;">
+                <div class="project-img-placeholder" style="color: rgba(255,255,255,0.05); background: #000;">
+                    <span>[ VACANTE ]</span>
+                </div>
+                <div class="project-info">
+                    <h3>Próximamente...</h3>
+                    <p>Espacio reservado para futuros proyectos o integraciones de APIs públicas en desarrollo.</p>
+                    <a href="#" class="cyber-btn" style="pointer-events: none; opacity: 0.5;">En Construcción</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 Daniel Hornos | GOTO 10. Todos los derechos reservados.</p>
+        <a href="#login-privado" class="private-link" title="Área Privada"
+            onclick="prompt('Ingrese contraseña (Modo Demo):'); return false;">
+            🔒
         </a>
-    </main>
+    </footer>
+
 </body>
 
 </html>

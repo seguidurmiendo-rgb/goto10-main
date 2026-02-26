@@ -1,0 +1,597 @@
+:root {
+  --neon-blue: #00f3ff;
+  --neon-purple: #bc13fe;
+  --neon-accent: #ff0055;
+  --dark-bg: #050510;
+  --darker-bg: #020205;
+  --panel-bg: rgba(20, 20, 40, 0.6);
+  --text-main: #ffffff;
+  --text-muted: #aaaaaa;
+  --grid-color: rgba(0, 243, 255, 0.05);
+
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  /* Evita que el navbar oculte el titulo de la seccion */
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-attachment: fixed;
+}
+
+/* --- Scrollbar Estilizado --- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--darker-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--panel-bg);
+  border: 1px solid var(--neon-blue);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-blue);
+}
+
+
+/* --- Tipografía --- */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h2.section-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+}
+
+/* --- Navegación --- */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0.8rem 5%;
+  /* Reducido de 1.5rem a 0.8rem para que ocupe menos espacio */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  background: rgba(5, 5, 16, 0.8);
+  border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.nav-links a:hover {
+  color: var(--neon-blue);
+  text-shadow: 0 0 5px var(--neon-blue);
+}
+
+/* --- HERO SECTION --- */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 0 20px;
+  overflow: hidden;
+  /* Evita scrolls al rotar el fondo */
+}
+
+/* Pseudo-elemento para el fondo rotado que se adapta al navegador */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Invertimos vw por vh y vh por vw porque la imagen está rotada */
+  width: 100vh;
+  height: 100vw;
+  background-image: linear-gradient(to right, rgba(5, 5, 16, 0.7), var(--dark-bg)), url('../assets/img/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Centramos y rotamos */
+  transform: translate(-50%, -50%) rotate(90deg);
+  z-index: 1;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* El linear-gradient oculta el borde inferior y el radial da el viñetado general */
+  background:
+    linear-gradient(to bottom, transparent 80%, var(--dark-bg) 100%),
+    radial-gradient(circle, transparent 20%, var(--dark-bg) 90%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  animation: fadeIn 2s ease-out;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  letter-spacing: 5px;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 30px var(--neon-blue);
+}
+
+.hero h2 {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: var(--text-muted);
+  letter-spacing: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  color: #ccc;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Botones --- */
+.cyber-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--neon-blue);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.6rem 1.5rem;
+  border: 1px solid var(--neon-blue);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.cyber-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.2), transparent);
+  transition: all 0.4s ease;
+}
+
+.cyber-btn:hover {
+  background: rgba(0, 243, 255, 0.1);
+  box-shadow: 0 0 15px var(--neon-blue), inset 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.cyber-btn:hover::before {
+  left: 100%;
+}
+
+.cyber-btn.accent {
+  color: var(--neon-purple);
+  border-color: var(--neon-purple);
+}
+
+.cyber-btn.accent:hover {
+  background: rgba(188, 19, 254, 0.1);
+  box-shadow: 0 0 15px var(--neon-purple), inset 0 0 10px rgba(188, 19, 254, 0.2);
+}
+
+.cyber-btn.accent::before {
+  background: linear-gradient(90deg, transparent, rgba(188, 19, 254, 0.2), transparent);
+}
+
+
+/* --- SECCIONES GENÉRICAS --- */
+section {
+  padding: 4rem 5%;
+  position: relative;
+}
+
+/* --- TIMELINE (TIRO DEPORTIVO) --- */
+#tiro {
+  position: relative;
+  overflow: hidden;
+  background-image: linear-gradient(to bottom, rgba(5, 5, 16, 0.9), rgba(5, 5, 16, 0.7), var(--dark-bg)), url('../assets/img/projects-bg.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  /* Efecto parallax suave */
+  background-repeat: no-repeat;
+}
+
+#tiro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* El linear-gradient oculta los bordes superior e inferior y el radial hace el viñetado */
+  background:
+    linear-gradient(to bottom, var(--dark-bg) 0%, transparent 15%, transparent 85%, var(--dark-bg) 100%),
+    radial-gradient(circle, transparent 10%, var(--dark-bg) 95%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#tiro>h2,
+#tiro>.timeline-container {
+  position: relative;
+  z-index: 10;
+}
+
+.timeline-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline-container::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  background: var(--neon-blue);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -1px;
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.timeline-item {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+.timeline-item.left {
+  left: 0;
+}
+
+.timeline-item.right {
+  left: 50%;
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  right: -8px;
+  background-color: var(--dark-bg);
+  border: 4px solid var(--neon-blue);
+  top: 20px;
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.timeline-item.right::after {
+  left: -8px;
+}
+
+.timeline-content {
+  padding: 20px 30px;
+  background: var(--panel-bg);
+  position: relative;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 243, 255, 0.2);
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 243, 255, 0.2);
+  border-color: var(--neon-blue);
+}
+
+.timeline-content h3 {
+  color: var(--neon-blue);
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.timeline-content h4 {
+  color: var(--neon-purple);
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.timeline-content p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.timeline-date {
+  position: absolute;
+  /* El line-height y el padding hacen que el dot esté aproximadamente aquí */
+  top: 10px;
+
+  /* Para cajas del lado izquierdo (cuya fecha va al lado derecho de la línea) */
+  left: calc(100% + 55px);
+  right: auto;
+  text-align: left;
+
+  color: var(--text-main);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  /* Evita que la fecha se quiebre en dos líneas si es larga */
+  text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.timeline-item.right .timeline-date {
+  /* Para cajas del lado derecho (cuya fecha va al lado izquierdo de la línea) */
+  right: calc(100% + 55px);
+  left: auto;
+  text-align: right;
+}
+
+/* --- PROYECTOS --- */
+#proyectos {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fondo de código para Proyectos */
+#proyectos::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/img/coding-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  z-index: 0;
+  opacity: 0.3;
+  /* Opacidad para que el código brille sin saturar los textos */
+}
+
+/* Capa separada para el degradado: este sí tiene opacidad 100% para fundirse perfectamente al negro sólido */
+#proyectos::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, var(--dark-bg) 0%, transparent 15%, transparent 85%, var(--dark-bg) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Asegurar que el contenido de proyectos quede por encima del fondo */
+#proyectos>h2,
+#proyectos>.projects-grid {
+  position: relative;
+
+  z-index: 10;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.project-card {
+  background: var(--panel-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  border-color: var(--neon-purple);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(188, 19, 254, 0.2);
+}
+
+.project-img-placeholder {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(45deg, #1a1a2e, #16213e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: var(--font-heading);
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 1.5rem;
+  letter-spacing: 4px;
+}
+
+.project-info {
+  padding: 1.2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.project-info p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+  flex-grow: 1;
+}
+
+/* --- FOOTER --- */
+footer {
+  padding: 2rem 5%;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--dark-bg);
+  /* Unificamos con el dark-bg para que no haya línea visible */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.private-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+  opacity: 0.5;
+}
+
+.private-link:hover {
+  color: var(--neon-accent);
+  opacity: 1;
+  text-shadow: 0 0 10px var(--neon-accent);
+}
+
+/* --- ANIMACIONES --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- RESPONSIVE --- */
+@media screen and (max-width: 768px) {
+  .timeline-container::after {
+    left: 31px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+  }
+
+  .timeline-item.right {
+    left: 0%;
+  }
+
+  .timeline-item.left::after,
+  .timeline-item.right::after {
+    left: 23px;
+  }
+
+  .timeline-date {
+    position: static;
+    display: block;
+    margin-bottom: 10px;
+    color: var(--neon-blue);
+  }
+
+  .timeline-item.right .timeline-date {
+    text-align: left;
+  }
+
+  .nav-links {
+    display: none;
+    /* Simplificado para celular en esta v1 */
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
