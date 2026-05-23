@@ -110,6 +110,7 @@
             <a href="#inicio">Inicio</a>
             <a href="#tiro">Trayectoria Deportiva</a>
             <a href="#proyectos">Desarrollo Web</a>
+            <a href="#contacto">Contacto</a>
         </div>
     </nav>
 
@@ -359,6 +360,43 @@
         </div>
     </section>
 
+    <!-- Sección Contacto (Formulario con n8n) -->
+    <section id="contacto">
+        <h2 class="section-title">Contacto</h2>
+        <div class="contact-container">
+            <div class="contact-card">
+                <div class="contact-header">
+                    <span class="system-status">// MÓDULO DE TRANSMISIÓN DIRECTA //</span>
+                    <p>Envíame un mensaje y el sistema lo enviará directamente a mis canales de comunicación.</p>
+                </div>
+                <form id="contact-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="contact-name">Nombre</label>
+                            <input type="text" id="contact-name" name="nombre" required placeholder="Tu nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email</label>
+                            <input type="email" id="contact-email" name="email" required placeholder="tu@email.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-subject">Asunto</label>
+                        <input type="text" id="contact-subject" name="asunto" required placeholder="Motivo del mensaje">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message">Mensaje</label>
+                        <textarea id="contact-message" name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                    </div>
+                    <button type="submit" class="cyber-btn accent" id="submit-btn">
+                        <span>// ENVIAR MENSAJE //</span>
+                    </button>
+                    <div id="form-feedback" class="form-feedback"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Pie de página -->
     <footer>
         <p>&copy; 2026 Daniel Hornos | GOTO 10. Todos los derechos reservados.</p>
@@ -453,6 +491,105 @@
             
             window.addEventListener('scroll', handleScroll, { passive: true });
             handleScroll(); // Ejecutar al inicio por si hay scroll previo
+
+            // 4. Envío del Formulario de Contacto a n8n
+            const contactForm = document.getElementById('contact-form');
+            const formFeedback = document.getElementById('form-feedback');
+            const submitBtn = document.getElementById('submit-btn');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const N8N_WEBHOOK_URL = 'https://n8n.goto10.com.ar/webhook/contacto';
+                    
+                    const formData = {
+                        nombre: document.getElementById('contact-name').value,
+                        email: document.getElementById('contact-email').value,
+                        asunto: document.getElementById('contact-subject').value,
+                        mensaje: document.getElementById('contact-message').value
+                    };
+
+                    formFeedback.className = 'form-feedback loading';
+                    formFeedback.innerText = '// TRANSMITIENDO DATOS... //';
+                    formFeedback.style.opacity = '1';
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.5';
+
+                    try {
+                        const response = await fetch(N8N_WEBHOOK_URL, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(formData)
+                        });
+
+                        if (response.ok) {
+                            formFeedback.className = 'form-feedback success';
+                            formFeedback.innerText = '// MENSAJE ENVIADO CON ÉXITO //';
+                            contactForm.reset();
+                        } else {
+                            throw new Error('Fallo en el servidor n8n');
+                        }
+                    } catch (error) {
+                        console.error('Error al enviar formulario:', error);
+                        formFeedback.className = 'form-feedback error';
+                        formFeedback.innerText = '// FALLO EN LA TRANSMISIÓN // INTENTAR MÁS TARDE //';
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '1';
+                        setTimeout(() => {
+                            formFeedback.style.opacity = '0';
+                        }, 5000);
+                    }
+                });
+            }
+
+            // 5. Ping de Notificación de Visita al cargar la página
+            const sendVisitaNotification = async () => {
+                const N8N_VISITA_URL = 'https://n8n.goto10.com.ar/webhook/visita';
+                
+                let locationData = { pais: 'Desconocido', ciudad: 'Desconocida' };
+                try {
+                    // Obtener ubicación anónima aproximada por IP
+                    const ipResponse = await fetch('https://ipapi.co/json/');
+                    if (ipResponse.ok) {
+                        const ipData = await ipResponse.json();
+                        locationData.pais = ipData.country_name || 'Desconocido';
+                        locationData.ciudad = ipData.city || 'Desconocida';
+                    }
+                } catch (e) {
+                    console.log('No se pudo determinar la ubicación:', e);
+                }
+
+                let dispositivo = 'Escritorio';
+                if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+                    dispositivo = 'Móvil';
+                }
+
+                try {
+                    await fetch(N8N_VISITA_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            tipo: 'visita',
+                            dispositivo: dispositivo,
+                            pais: locationData.pais,
+                            ciudad: locationData.ciudad,
+                            url: window.location.href,
+                            timestamp: new Date().toISOString()
+                        })
+                    });
+                } catch (err) {
+                    console.log('Ping de visita fallido (n8n offline):', err);
+                }
+            };
+
+            // Disparar notificación de visita 1.2 segundos después de cargar la página
+            setTimeout(sendVisitaNotification, 1200);
         });
     </script>
 

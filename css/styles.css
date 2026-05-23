@@ -973,3 +973,127 @@ footer {
   letter-spacing: 1px;
   opacity: 0.7;
 }
+
+/* --- SECCIÓN CONTACTO (ESTILO BALÍSTICO / TÉCNICO) --- */
+#contacto {
+  background: linear-gradient(180deg, var(--dark-bg) 0%, rgba(10, 10, 15, 0.95) 50%, var(--dark-bg) 100%);
+  position: relative;
+}
+
+.contact-container {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+.contact-card {
+  background: var(--panel-bg);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  padding: 2.5rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.contact-header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media screen and (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.form-group input,
+.form-group textarea {
+  background: rgba(7, 7, 10, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 0.8rem 1rem;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(0, 255, 159, 0.1);
+  background: rgba(7, 7, 10, 0.8);
+}
+
+#contacto .cyber-btn {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 0.95rem;
+  letter-spacing: 1.5px;
+  margin-top: 1rem;
+}
+
+.form-feedback {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.form-feedback.success {
+  color: var(--primary);
+  opacity: 1;
+  text-shadow: 0 0 8px rgba(0, 255, 159, 0.3);
+}
+
+.form-feedback.error {
+  color: var(--accent);
+  opacity: 1;
+  text-shadow: 0 0 8px rgba(255, 61, 0, 0.3);
+}
+
+.form-feedback.loading {
+  color: var(--secondary);
+  opacity: 1;
+  text-shadow: 0 0 8px rgba(0, 176, 255, 0.3);
+}
