@@ -34,6 +34,18 @@
     </div>
     <script>
         (function() {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            // Omitir loader por completo si ya se ejecutó en la sesión o si se prefiere reducción de movimiento
+            if (sessionStorage.getItem('loader-played') === 'true' || prefersReducedMotion) {
+                const loader = document.getElementById('loader-overlay');
+                if (loader) {
+                    loader.style.display = 'none';
+                    loader.remove();
+                }
+                return;
+            }
+
             const imagesToPreload = [
                 'assets/img/hero-profile-bg.jpg',
                 'assets/img/tiro-bg.jpg',
@@ -48,11 +60,12 @@
                 
                 const showNextFlash = () => {
                     if (currentStep >= totalImages) {
-                        // Secuencia terminada, abrimos la página
+                        // Secuencia terminada, abrimos la página y guardamos estado
                         setTimeout(() => {
                             const loader = document.getElementById('loader-overlay');
                             if (loader) {
                                 loader.classList.add('fade-out');
+                                sessionStorage.setItem('loader-played', 'true');
                                 setTimeout(() => loader.remove(), 500);
                             }
                         }, 150);
@@ -106,11 +119,17 @@
     <!-- Navegación Superior -->
     <nav>
         <a href="#" class="logo">GOTO 10</a>
-        <div class="nav-links">
-            <a href="#inicio">Inicio</a>
-            <a href="#tiro">Trayectoria Deportiva</a>
-            <a href="#proyectos">Desarrollo Web</a>
-            <a href="#contacto">Contacto</a>
+        <!-- Botón Hamburguesa Móvil -->
+        <button type="button" class="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" onclick="toggleMobileMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <div class="nav-links" id="nav-links">
+            <a href="#inicio" onclick="closeMobileMenu()">Inicio</a>
+            <a href="#tiro" onclick="closeMobileMenu()">Trayectoria Deportiva</a>
+            <a href="#proyectos" onclick="closeMobileMenu()">Desarrollo Web</a>
+            <a href="#contacto" onclick="closeMobileMenu()">Contacto</a>
         </div>
     </nav>
 
@@ -133,60 +152,9 @@
             <h1>Daniel Hornos</h1>
             <h2>Desarrollador de Sistemas & Tirador Deportivo</h2>
             <p>Enfoque técnico, análisis y constancia aplicados al desarrollo de software y a la práctica deportiva del tiro de precisión.</p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
+            <div class="hero-actions">
                 <a href="#tiro" class="cyber-btn">Ver Trayectoria</a>
                 <a href="#proyectos" class="cyber-btn accent">Ver Desarrollos</a>
-            </div>
-
-            <!-- Sitios Amigos -->
-            <div class="friendly-sites">
-                <h3>SITIOS AMIGOS</h3>
-                <div class="friends-wrapper">
-                    <!-- Wildcat Academy -->
-                    <div class="friend-card">
-                        <a href="https://www.wildcat.com.ar/" target="_blank" rel="noopener noreferrer"
-                            title="Web Wildcat Academy">
-                            <img src="assets/img/LOGO_ACADEMIA_wildcat-letrasblancas.png" alt="Wildcat Academy"
-                                class="friend-logo">
-                        </a>
-                        <a href="https://www.instagram.com/academiawildcat" target="_blank" rel="noopener noreferrer"
-                            class="social-icon" title="Instagram Wildcat Academy">
-                            <!-- SVG Icono de Instagram -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                            </svg>
-                        </a>
-                    </div>
-                    <!-- Cuervo Tattoo Ink -->
-                    <div class="friend-card">
-                        <a href="https://cuervo-tattoo-ink.goto10.com.ar/" target="_blank" rel="noopener noreferrer"
-                            title="Web Cuervo Tattoo Ink">
-                            <img src="assets/img/Cuervo_tattoo_ink.jpeg" alt="Cuervo Tattoo Ink"
-                                class="friend-logo invert-logo rounded-logo">
-                        </a>
-                        <a href="https://www.instagram.com/cuervo_tattoo.ink/" target="_blank" rel="noopener noreferrer"
-                            class="social-icon" title="Instagram Cuervo Tattoo Ink">
-                            <!-- SVG Icono de Instagram -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                            </svg>
-                        </a>
-                    </div>
-                    <!-- Vittoria Belleza -->
-                    <div class="friend-card">
-                        <a href="https://vittoria.goto10.com.ar/" target="_blank" rel="noopener noreferrer"
-                            title="Web Vittoria Belleza">
-                            <img src="assets/img/vittoria-logo.png" alt="Vittoria Belleza"
-                                class="friend-logo rounded-logo">
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </header>
@@ -202,7 +170,7 @@
                     <h3>Torneo San Fernando</h3>
                     <h4>Fecha 2 "Malvinas Argentinas"</h4>
                     <p>Excelente desempeño en la segunda fecha de la temporada del Campeonato Anual. Logros: <strong>Puesto 2 en Precisión Pistola 22LR 🥈 y Puesto 3 en Tiro Rápido 🥉</strong>.</p>
-                    <a href="#" class="view-evidence-btn" data-img="assets/img/trayectoria/torneo-san-fernando-abril-2026.jpg" onclick="openLightbox(event, this)">[ VER CERTIFICADOS Y MEDALLAS ]</a>
+                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/torneo-san-fernando-abril-2026.jpg" onclick="openLightbox(event, this)">VER CERTIFICADOS Y MEDALLAS</button>
                 </div>
             </div>
 
@@ -213,7 +181,7 @@
                     <h3>Torneo San Fernando</h3>
                     <h4>Apertura de Temporada</h4>
                     <p>Inicio de la nueva temporada competitiva con solidez en el top 5. Logro: <strong>Puesto 1 de 20 (Podio 🥇)</strong>.</p>
-                    <a href="#" class="view-evidence-btn" data-img="assets/img/trayectoria/torneo-san-fernando-2026.jpg" onclick="openLightbox(event, this)">[ VER REGISTRO DE PREMIACIÓN ]</a>
+                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/torneo-san-fernando-2026.jpg" onclick="openLightbox(event, this)">VER REGISTRO DE PREMIACIÓN</button>
                 </div>
             </div>
 
@@ -224,7 +192,7 @@
                     <h3>Torneo SITAS</h3>
                     <h4>Doble Podio de Cierre</h4>
                     <p>Cierre de año excepcional demostrando versatilidad en diferentes calibres ante 40 tiradores. Logro: <strong>Puesto 1 en 9mm 🥇 y Puesto 3 en .22LR 🥉</strong>.</p>
-                    <a href="#" class="view-evidence-btn" data-img="assets/img/trayectoria/podio-sitas-2025.jpg" onclick="openLightbox(event, this)">[ VER PODIO E IMPACTOS ]</a>
+                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/podio-sitas-2025.jpg" onclick="openLightbox(event, this)">VER PODIO E IMPACTOS</button>
                 </div>
             </div>
 
@@ -245,7 +213,7 @@
                     <h3>Torneo San Fernando</h3>
                     <h4>Primer Podio Nacional</h4>
                     <p>Excelente desempeño en precisión deportiva. Logro: <strong>Puesto 3 de 40 (Podio 🥉)</strong>.</p>
-                    <a href="#" class="view-evidence-btn" data-img="assets/img/trayectoria/diploma-san-fernando-2025.jpg" onclick="openLightbox(event, this)">[ VER CERTIFICADO Y MEDALLA ]</a>
+                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/diploma-san-fernando-2025.jpg" onclick="openLightbox(event, this)">VER CERTIFICADO Y MEDALLA</button>
                 </div>
             </div>
 
@@ -256,7 +224,7 @@
                     <h3>Torneo Quilmes</h3>
                     <h4>Circuito Metropolitano</h4>
                     <p>Participación en el polígono de Quilmes mejorando la consistencia. Logro: <strong>Puesto 25 de 30</strong> participantes.</p>
-                    <a href="#" class="view-evidence-btn" data-img="assets/img/trayectoria/diploma-quilmes-2025.jpg" onclick="openLightbox(event, this)">[ VER DIPLOMA DIGITAL ]</a>
+                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/diploma-quilmes-2025.jpg" onclick="openLightbox(event, this)">VER DIPLOMA DIGITAL</button>
                 </div>
             </div>
 
@@ -267,7 +235,7 @@
                     <h3>Torneo SITAS</h3>
                     <h4>Debut Competitivo</h4>
                     <p>Primer torneo oficial de precisión. Logro: <strong>Puesto 19 de 40</strong> participantes.</p>
-                    <a href="#" class="view-evidence-btn" data-img="assets/img/trayectoria/diploma-sitas-debut-2025.jpg" onclick="openLightbox(event, this)">[ VER DIPLOMA DE DEBUT ]</a>
+                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/diploma-sitas-debut-2025.jpg" onclick="openLightbox(event, this)">VER DIPLOMA DE DEBUT</button>
                 </div>
             </div>
 
@@ -278,7 +246,7 @@
                     <h3>Clasificación y Deporte</h3>
                     <h4>Tiro Deportivo</h4>
                     <p>Curso avanzado sobre modalidades deportivas. Incluyó un mini-torneo integrador entre estudiantes. Logro: <strong>Puesto 2 🥈</strong>.</p>
-                    <a href="assets/docs/credencial-tiro-deportivo.pdf" target="_blank" class="view-evidence-btn">[ VER CERTIFICADO PDF 📄 ]</a>
+                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/credencial-tiro-deportivo.jpg" onclick="openLightbox(event, this)">VER CREDENCIAL</button>
                 </div>
             </div>
 
@@ -289,7 +257,7 @@
                     <h3>Armamento</h3>
                     <h4>Limpieza y Mantenimiento</h4>
                     <p>Curso especializado en el mantenimiento de diferentes sistemas de armas, garantizando un funcionamiento seguro y confiable.</p>
-                    <a href="assets/docs/credencial-mantenimiento-armas.pdf" target="_blank" class="view-evidence-btn">[ VER CERTIFICADO PDF 📄 ]</a>
+                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/credencial-mantenimiento-armas.jpg" onclick="openLightbox(event, this)">VER CREDENCIAL</button>
                 </div>
             </div>
 
@@ -300,12 +268,12 @@
                     <h3>Capacitación Inicial</h3>
                     <h4>Introducción al Tiro</h4>
                     <p>Inicios formales en la disciplina como tirador deportivo, completando la capacitación teórica y práctica inicial.</p>
-                    <a href="assets/docs/credencial-capacitacion-inicial.pdf" target="_blank" class="view-evidence-btn">[ VER CERTIFICADO PDF 📄 ]</a>
+                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/credencial-capacitacion-inicial.jpg" onclick="openLightbox(event, this)">VER CREDENCIAL</button>
                 </div>
             </div>
         </div>
         <div class="timeline-toggle-container">
-            <button id="toggle-timeline-btn" class="cyber-btn" data-expanded="false">// MOSTRAR REGISTRO COMPLETO //</button>
+            <button id="toggle-timeline-btn" class="cyber-btn" aria-expanded="false" aria-label="Mostrar u ocultar registro completo de trayectoria">// MOSTRAR REGISTRO COMPLETO //</button>
         </div>
     </section>
 
@@ -317,48 +285,107 @@
 
             <!-- Proyecto SITAS -->
             <div class="project-card">
+                <div class="project-img-container">
+                    <img src="assets/img/sitas-project.png" alt="Captura de pantalla de la plataforma Torneo SITAS" class="project-img">
+                </div>
                 <div class="project-info">
                     <h3>Plataforma Torneo SITAS</h3>
                     <p>Desarrollo integral ad honorem del portal oficial web para el torneo de tiro del club SITAS.
                         Incluye gestión de inscripciones, publicación de reglamentos y sistema de ranking en tiempo
                         real, operando bajo un subdominio personalizado.</p>
-                    <a href="https://torneo2026.goto10.com.ar" target="_blank" class="cyber-btn">Ir al Torneo 🎯</a>
+                    <a href="https://torneo2026.goto10.com.ar" target="_blank" rel="noopener noreferrer" class="cyber-btn">Ir al Torneo 🎯</a>
                 </div>
             </div>
 
             <!-- Proyecto PYAT -->
             <div class="project-card">
+                <div class="project-img-container">
+                    <img src="assets/img/pyat-project.png" alt="Captura de pantalla del Dashboard Ecosistema PYAT" class="project-img">
+                </div>
                 <div class="project-info">
                     <h3>Ecosistema PYAT</h3>
                     <p>Módulos de gestión empresarial corporativa desarrollados en Python. Integración de bases de datos
                         centralizadas, facturación interactiva, seguimiento de cotizaciones y visualización modular de
                         datos financieros.</p>
-                    <a href="#" class="cyber-btn"
-                        onclick="alert('Sistema de uso interno corporativo. Acceso restringido a capturas estáticas elegidas.'); return false;">Ver
-                        Galería Prev.</a>
+                    <button type="button" class="cyber-btn" onclick="openPyatGallery()">Ver Galería Prev.</button>
                 </div>
             </div>
 
             <!-- Proyecto Cuervo Tattoo -->
             <div class="project-card">
+                <div class="project-img-container">
+                    <img src="assets/img/cuervo-project.png" alt="Captura de pantalla del sitio Cuervo Tattoo Ink" class="project-img">
+                </div>
                 <div class="project-info">
                     <h3>Cuervo Tattoo Ink</h3>
                     <p>Diseño y desarrollo de sitio corporativo para "Cuervo Tattoo Ink", optimizado para destacar el portfolio artístico y facilitar el contacto directo.</p>
-                    <a href="https://cuervo-tattoo-ink.goto10.com.ar/" target="_blank" class="cyber-btn">Ver Sitio 🌐</a>
+                    <a href="https://cuervo-tattoo-ink.goto10.com.ar/" target="_blank" rel="noopener noreferrer" class="cyber-btn">Ver Sitio 🌐</a>
                 </div>
             </div>
 
             <!-- Proyecto Vittoria -->
             <div class="project-card">
+                <div class="project-img-container">
+                    <img src="assets/img/vittoria-project.png" alt="Captura de pantalla del catálogo Vittoria Belleza" class="project-img">
+                </div>
                 <div class="project-info">
                     <h3>Vittoria Belleza</h3>
                     <p>Plataforma web premium y catálogo interactivo para la venta de productos de belleza y perfumería. Cuenta con carga dinámica de catálogos de temporada, diseño minimalista adaptado a dispositivos móviles e integración directa para pedidos vía WhatsApp.</p>
-                    <a href="https://vittoria.goto10.com.ar/" target="_blank" class="cyber-btn">Ver Sitio 🛍️</a>
+                    <a href="https://vittoria.goto10.com.ar/" target="_blank" rel="noopener noreferrer" class="cyber-btn">Ver Sitio 🛍️</a>
                 </div>
             </div>
 
         </div>
     </section>
+
+    <!-- Sitios Amigos (Reubicado de forma segura fuera del Hero) -->
+    <div class="friendly-sites" style="padding: 2rem 8% 4rem 8%; text-align: center; background: var(--dark-bg);">
+        <h3 style="font-family: var(--font-heading); font-size: 0.75rem; color: var(--text-muted); letter-spacing: 3px; margin-bottom: 2rem; text-transform: uppercase;">Sitios Amigos</h3>
+        <div class="friends-wrapper" style="display: flex; justify-content: center; align-items: center; gap: 4rem; flex-wrap: wrap;">
+            <!-- Wildcat Academy -->
+            <div class="friend-card">
+                <a href="https://www.wildcat.com.ar/" target="_blank" rel="noopener noreferrer"
+                    title="Web Wildcat Academy">
+                    <img src="assets/img/LOGO_ACADEMIA_wildcat-letrasblancas.png" alt="Wildcat Academy"
+                        class="friend-logo">
+                </a>
+                <a href="https://www.instagram.com/academiawildcat" target="_blank" rel="noopener noreferrer"
+                    class="social-icon" aria-label="Instagram Wildcat Academy">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+            </div>
+            <!-- Cuervo Tattoo Ink -->
+            <div class="friend-card">
+                <a href="https://cuervo-tattoo-ink.goto10.com.ar/" target="_blank" rel="noopener noreferrer"
+                    title="Web Cuervo Tattoo Ink">
+                    <img src="assets/img/Cuervo_tattoo_ink.jpeg" alt="Cuervo Tattoo Ink"
+                        class="friend-logo invert-logo rounded-logo">
+                </a>
+                <a href="https://www.instagram.com/cuervo_tattoo.ink/" target="_blank" rel="noopener noreferrer"
+                    class="social-icon" aria-label="Instagram Cuervo Tattoo Ink">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+            </div>
+            <!-- Vittoria Belleza -->
+            <div class="friend-card">
+                <a href="https://vittoria.goto10.com.ar/" target="_blank" rel="noopener noreferrer"
+                    title="Web Vittoria Belleza">
+                    <img src="assets/img/vittoria-logo.png" alt="Vittoria Belleza"
+                        class="friend-logo rounded-logo">
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Sección Contacto (Formulario con n8n) -->
     <section id="contacto">
@@ -400,20 +427,30 @@
     <!-- Pie de página -->
     <footer>
         <p>&copy; 2026 Daniel Hornos | GOTO 10. Todos los derechos reservados.</p>
-        <a href="#login-privado" class="private-link" title="Área Privada"
-            onclick="prompt('Ingrese contraseña (Modo Demo):'); return false;">
+        <button type="button" class="private-link" aria-label="Acceso al área privada"
+            onclick="openAdminAuthModal()">
             🔒
-        </a>
+        </button>
     </footer>
 
+    <!-- Modal Táctico Reutilizable para alertas e inputs -->
+    <div id="cyber-modal" class="lightbox" onclick="closeCyberModal()" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="cyber-modal-title">
+        <div class="contact-card modal-content" onclick="event.stopPropagation()">
+            <button type="button" class="lightbox-close" aria-label="Cerrar ventana" onclick="closeCyberModal()">&times;</button>
+            <div id="modal-body-content">
+                <!-- Se inyecta dinámicamente el contenido -->
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Lightbox para visualización de evidencias -->
-    <div id="lightbox-modal" class="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <img class="lightbox-content" id="lightbox-img" alt="Evidencia de logro">
+    <div id="lightbox-modal" class="lightbox" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="lightbox-caption">
+        <button type="button" class="lightbox-close" aria-label="Cerrar visor" onclick="closeLightbox()">&times;</button>
+        <img class="lightbox-content" id="lightbox-img" alt="">
         <div id="lightbox-caption"></div>
     </div>
 
-    <!-- Lógica de interactividad (Timeline collapsible y Visor Lightbox) -->
+    <!-- Lógica de interactividad -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Control del Timeline Collapsible
@@ -422,7 +459,7 @@
 
             if (toggleBtn && hiddenItems.length > 0) {
                 toggleBtn.addEventListener('click', () => {
-                    const isExpanded = toggleBtn.getAttribute('data-expanded') === 'true';
+                    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
                     
                     hiddenItems.forEach(item => {
                         if (isExpanded) {
@@ -434,55 +471,206 @@
 
                     if (isExpanded) {
                         toggleBtn.innerHTML = '// MOSTRAR REGISTRO COMPLETO //';
-                        toggleBtn.setAttribute('data-expanded', 'false');
+                        toggleBtn.setAttribute('aria-expanded', 'false');
                         // Desplazar la vista suavemente de vuelta a la cabecera de la sección
                         document.getElementById('tiro').scrollIntoView({ behavior: 'smooth' });
                     } else {
                         toggleBtn.innerHTML = '// COLAPSAR HISTORIAL //';
-                        toggleBtn.setAttribute('data-expanded', 'true');
+                        toggleBtn.setAttribute('aria-expanded', 'true');
                     }
                 });
             }
 
-            // 2. Control del Lightbox
+            // 2. Control del Lightbox (Con Focus Trap y Accesibilidad)
             const lightbox = document.getElementById('lightbox-modal');
             const lightboxImg = document.getElementById('lightbox-img');
             const lightboxCaption = document.getElementById('lightbox-caption');
+            let lastActiveElement = null;
 
             window.openLightbox = function(event, element) {
                 event.preventDefault();
-                event.stopPropagation(); // Evitar que el clic en el botón active el close del contenedor
+                event.stopPropagation();
+                lastActiveElement = document.activeElement;
                 const imgSrc = element.getAttribute('data-img');
                 const imgCaption = element.textContent || "Evidencia de logro";
+                const cleanCaption = imgCaption.replace('[', '').replace(']', '').trim();
                 
                 if (lightbox && lightboxImg) {
                     lightboxImg.src = imgSrc;
+                    lightboxImg.alt = cleanCaption;
                     if (lightboxCaption) {
-                        // Limpiar los corchetes decorativos del texto para el caption
-                        lightboxCaption.innerHTML = imgCaption.replace('[', '').replace(']', '').trim();
+                        lightboxCaption.innerHTML = cleanCaption;
                     }
                     lightbox.classList.add('active');
+                    lightbox.setAttribute('aria-hidden', 'false');
+                    
+                    // Foco al botón de cerrar
+                    const closeBtn = lightbox.querySelector('.lightbox-close');
+                    if (closeBtn) closeBtn.focus();
                 }
             };
 
             window.closeLightbox = function() {
                 if (lightbox) {
                     lightbox.classList.remove('active');
+                    lightbox.setAttribute('aria-hidden', 'true');
+                    if (lastActiveElement) {
+                        lastActiveElement.focus();
+                    }
                 }
             };
 
-            // Cerrar con la tecla Escape
+            // 3. Control del Modal Táctico Reutilizable (#cyber-modal)
+            const cyberModal = document.getElementById('cyber-modal');
+            const cyberBody = document.getElementById('modal-body-content');
+            let lastActiveCyberElement = null;
+
+            window.openCyberModal = function(htmlContent) {
+                lastActiveCyberElement = document.activeElement;
+                if(cyberModal && cyberBody) {
+                    cyberBody.innerHTML = htmlContent;
+                    cyberModal.classList.add('active');
+                    cyberModal.setAttribute('aria-hidden', 'false');
+                    
+                    // Intentar enfocar el primer elemento interactivo
+                    const closeBtn = cyberModal.querySelector('.lightbox-close');
+                    if (closeBtn) closeBtn.focus();
+                }
+            };
+
+            window.closeCyberModal = function() {
+                if (cyberModal) {
+                    cyberModal.classList.remove('active');
+                    cyberModal.setAttribute('aria-hidden', 'true');
+                    if (lastActiveCyberElement) {
+                        lastActiveCyberElement.focus();
+                    }
+                }
+            };
+
+            // Trampa de foco (Focus Trap) para ambos modales y Escape
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && lightbox && lightbox.classList.contains('active')) {
-                    closeLightbox();
+                const activeModal = [lightbox, cyberModal].find(m => m && m.classList.contains('active'));
+                if (!activeModal) return;
+
+                if (e.key === 'Escape') {
+                    if (activeModal === lightbox) closeLightbox();
+                    if (activeModal === cyberModal) closeCyberModal();
+                    return;
+                }
+
+                if (e.key === 'Tab') {
+                    const focusableElements = activeModal.querySelectorAll('button, input, textarea, a, [tabindex="0"]');
+                    if (focusableElements.length === 0) return;
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
+
+                    if (e.shiftKey) { // Shift + Tab
+                        if (document.activeElement === firstElement) {
+                            lastElement.focus();
+                            e.preventDefault();
+                        }
+                    } else { // Tab
+                        if (document.activeElement === lastElement) {
+                            firstElement.focus();
+                            e.preventDefault();
+                        }
+                    }
                 }
             });
 
-            // 3. Control de la barra de navegación (Ocultar al inicio, mostrar al hacer scroll)
+            // Lógica específica para modal de PYAT
+            window.openPyatGallery = function() {
+                openCyberModal(`
+                    <span class="system-status" id="cyber-modal-title">// ACCESO RESTRINGIDO //</span>
+                    <h3 style="margin: 1.5rem 0 1rem 0; font-family: var(--font-heading);">Ecosistema PYAT</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.6;">
+                        Este ecosistema es de uso interno corporativo y contiene información financiera sensible. A continuación se presentan capturas estáticas autorizadas para el portfolio:
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                        <div style="border: 1px dashed var(--secondary); padding: 1.5rem 1rem; border-radius: 4px; color: var(--secondary); font-family: var(--font-heading); font-size: 0.8rem; background: rgba(0, 176, 255, 0.02); text-align: center; flex: 1; min-width: 140px;">
+                            [ MÓDULO VENTAS ]
+                        </div>
+                        <div style="border: 1px dashed var(--secondary); padding: 1.5rem 1rem; border-radius: 4px; color: var(--secondary); font-family: var(--font-heading); font-size: 0.8rem; background: rgba(0, 176, 255, 0.02); text-align: center; flex: 1; min-width: 140px;">
+                            [ INDICADORES FINAN ]
+                        </div>
+                    </div>
+                    <button type="button" class="cyber-btn accent" onclick="closeCyberModal()" style="width: 100%;">// ENTENDIDO //</button>
+                `);
+            };
+
+            // Lógica de Autenticación de Administrador
+            window.openAdminAuthModal = function() {
+                openCyberModal(`
+                    <span class="system-status" id="cyber-modal-title">// TERMINAL DE AUTENTICACIÓN //</span>
+                    <h3 style="margin: 1.5rem 0 1rem 0; font-family: var(--font-heading);">ÁREA DE ACCESO PRIVADO</h3>
+                    <div class="form-group" style="margin-bottom: 1.5rem; text-align: left;">
+                        <label for="admin-pass-input" style="font-family: var(--font-heading); font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">Clave de Seguridad</label>
+                        <input type="password" id="admin-pass-input" placeholder="••••••••" style="width: 100%; margin-top: 0.5rem;" required>
+                        <div id="admin-auth-error" style="color: var(--accent); font-size: 0.8rem; margin-top: 0.5rem; font-family: var(--font-heading); display: none;">// ACCESO DENEGADO // CLAVE INCORRECTA //</div>
+                    </div>
+                    <button type="button" class="cyber-btn accent" onclick="validarAccesoPrivado()" style="width: 100%; margin-bottom: 0.5rem;">// ACCEDER //</button>
+                    <button type="button" class="cyber-btn" onclick="closeCyberModal()" style="width: 100%;">CANCELAR</button>
+                `);
+                
+                // Enfocar el input de clave directamente
+                setTimeout(() => {
+                    const passInput = document.getElementById('admin-pass-input');
+                    if (passInput) {
+                        passInput.focus();
+                        passInput.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter') {
+                                validarAccesoPrivado();
+                            }
+                        });
+                    }
+                }, 100);
+            };
+
+            window.validarAccesoPrivado = function() {
+                const passInput = document.getElementById('admin-pass-input');
+                const errDiv = document.getElementById('admin-auth-error');
+                if (passInput) {
+                    const value = passInput.value;
+                    if (value === "goto10admin") {
+                        // Entrada autorizada (simulada)
+                        closeCyberModal();
+                        setTimeout(() => alert('Modo Administrador Inicializado (Demo)'), 200);
+                    } else {
+                        if (errDiv) errDiv.style.display = 'block';
+                        passInput.value = '';
+                        passInput.focus();
+                    }
+                }
+            };
+
+            // 4. Control de Menú Hamburguesa Móvil
+            window.toggleMobileMenu = function() {
+                const toggleBtn = document.querySelector('.menu-toggle');
+                const navLinks = document.getElementById('nav-links');
+                if (toggleBtn && navLinks) {
+                    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+                    toggleBtn.setAttribute('aria-expanded', !isExpanded);
+                    toggleBtn.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                }
+            };
+
+            window.closeMobileMenu = function() {
+                const toggleBtn = document.querySelector('.menu-toggle');
+                const navLinks = document.getElementById('nav-links');
+                if (toggleBtn && navLinks && toggleBtn.classList.contains('active')) {
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                    toggleBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            };
+
+            // 5. Control de la barra de navegación (Opacidad al scroll)
             const nav = document.querySelector('nav');
             
             const handleScroll = () => {
-                if (window.scrollY > 150) {
+                if (window.scrollY > 100) {
                     nav.classList.add('nav-visible');
                 } else {
                     nav.classList.remove('nav-visible');
@@ -490,9 +678,9 @@
             };
             
             window.addEventListener('scroll', handleScroll, { passive: true });
-            handleScroll(); // Ejecutar al inicio por si hay scroll previo
+            handleScroll();
 
-            // 4. Envío del Formulario de Contacto a n8n
+            // 6. Envío del Formulario de Contacto a n8n
             const contactForm = document.getElementById('contact-form');
             const formFeedback = document.getElementById('form-feedback');
             const submitBtn = document.getElementById('submit-btn');
@@ -546,13 +734,12 @@
                 });
             }
 
-            // 5. Ping de Notificación de Visita al cargar la página
+            // 7. Ping de Notificación de Visita al cargar la página
             const sendVisitaNotification = async () => {
                 const N8N_VISITA_URL = 'https://n8n.goto10.com.ar/webhook/visita';
                 
                 let locationData = { pais: 'Desconocido', ciudad: 'Desconocida' };
                 try {
-                    // Obtener ubicación anónima aproximada por IP
                     const ipResponse = await fetch('https://ipapi.co/json/');
                     if (ipResponse.ok) {
                         const ipData = await ipResponse.json();
@@ -588,7 +775,6 @@
                 }
             };
 
-            // Disparar notificación de visita 1.2 segundos después de cargar la página
             setTimeout(sendVisitaNotification, 1200);
         });
     </script>

@@ -22,6 +22,16 @@
   box-sizing: border-box;
 }
 
+/* Indicador de enfoque accesible global para navegación por teclado */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 70px;
@@ -40,6 +50,13 @@ body {
     linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
   background-size: 40px 40px;
   background-attachment: fixed;
+  /* Puntero de mira telescópica verde por defecto (Cero lag, renderizado por hardware) */
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='10' fill='none' stroke='%2300ff9f' stroke-width='1.5' opacity='0.8'/><line x1='16' y1='2' x2='16' y2='10' stroke='%2300ff9f' stroke-width='1.5' opacity='0.8'/><line x1='16' y1='22' x2='16' y2='30' stroke='%2300ff9f' stroke-width='1.5' opacity='0.8'/><line x1='2' y1='16' x2='10' y2='16' stroke='%2300ff9f' stroke-width='1.5' opacity='0.8'/><line x1='22' y1='16' x2='30' y2='16' stroke='%2300ff9f' stroke-width='1.5' opacity='0.8'/><circle cx='16' cy='16' r='1.5' fill='%2300ff9f'/></svg>") 16 16, auto;
+}
+
+/* Mira telescópica roja de objetivo fijado en interactivos hover */
+a, button, select, input, textarea, [role="button"], .cyber-btn, .view-evidence-btn, .private-link, .lightbox-close {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='10' fill='none' stroke='%23ff3d00' stroke-width='1.5' opacity='0.9'/><line x1='16' y1='2' x2='16' y2='10' stroke='%23ff3d00' stroke-width='1.5' opacity='0.9'/><line x1='16' y1='22' x2='16' y2='30' stroke='%23ff3d00' stroke-width='1.5' opacity='0.9'/><line x1='2' y1='16' x2='10' y2='16' stroke='%23ff3d00' stroke-width='1.5' opacity='0.9'/><line x1='22' y1='16' x2='30' y2='16' stroke='%23ff3d00' stroke-width='1.5' opacity='0.9'/><circle cx='16' cy='16' r='1.5' fill='%23ff3d00'/></svg>") 16 16, pointer;
 }
 
 /* --- Scrollbar Estilizado --- */
@@ -108,20 +125,25 @@ nav {
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: rgba(7, 7, 10, 0.75);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, border-bottom 0.3s ease, padding 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease;
   transform: translateY(-100%);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
 
 nav.nav-visible {
   transform: translateY(0);
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(7, 7, 10, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.9rem 8%;
 }
 
 .logo {
@@ -364,6 +386,21 @@ nav.nav-visible {
   box-shadow: 0 0 20px rgba(0, 176, 255, 0.2);
 }
 
+.hero-actions {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  z-index: 10;
+}
+
+@media screen and (max-width: 768px) {
+  .hero-actions {
+    justify-content: center;
+  }
+}
+
 /* --- SITIOS AMIGOS --- */
 .friendly-sites {
   margin-top: 4rem;
@@ -394,14 +431,15 @@ nav.nav-visible {
   max-width: 130px;
   max-height: 45px;
   object-fit: contain;
-  opacity: 0.9;
+  filter: grayscale(1) brightness(0.8) contrast(1.2);
+  opacity: 0.55;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .friend-logo:hover {
+  filter: grayscale(0) brightness(1) contrast(1) drop-shadow(0 0 8px var(--primary));
   opacity: 1;
   transform: scale(1.05);
-  filter: drop-shadow(0 0 8px var(--primary));
 }
 
 .rounded-logo {
@@ -409,12 +447,12 @@ nav.nav-visible {
 }
 
 .invert-logo {
-  filter: invert(1);
-  opacity: 0.9;
+  filter: invert(1) grayscale(1);
+  opacity: 0.55;
 }
 
 .invert-logo:hover {
-  filter: invert(1) drop-shadow(0 0 8px var(--primary));
+  filter: invert(1) grayscale(0) drop-shadow(0 0 8px var(--primary));
   opacity: 1;
   transform: scale(1.05);
 }
@@ -444,7 +482,7 @@ section {
 #tiro {
   position: relative;
   background-image: 
-    linear-gradient(to bottom, var(--dark-bg) 0%, rgba(7, 7, 10, 0.65) 50%, var(--dark-bg) 100%),
+    linear-gradient(to bottom, var(--dark-bg) 0%, rgba(7, 7, 10, 0.85) 50%, var(--dark-bg) 100%),
     url('../assets/img/tiro-bg.jpg');
   background-size: cover;
   background-position: center;
@@ -550,7 +588,7 @@ section {
 #proyectos {
   position: relative;
   background-image: 
-    linear-gradient(to bottom, var(--dark-bg) 0%, rgba(7, 7, 10, 0.25) 50%, var(--dark-bg) 100%),
+    linear-gradient(to bottom, var(--dark-bg) 0%, rgba(7, 7, 10, 0.88) 50%, var(--dark-bg) 100%),
     url('../assets/img/projects-bg.png');
   background-size: cover;
   background-position: center;
@@ -672,9 +710,12 @@ footer {
   color: var(--text-muted);
   text-decoration: none;
   font-size: 1rem;
+  opacity: 0.85;
   transition: all 0.3s ease;
-  opacity: 0.4;
   padding: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .private-link:hover {
@@ -777,13 +818,14 @@ footer {
   margin-bottom: 2rem;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, transform 0.3s ease, margin 0.4s ease, padding 0.4s ease;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.4s ease, transform 0.3s ease, margin 0.4s ease, padding 0.4s ease;
   overflow: hidden;
 }
 
 .timeline-item.hidden-item.collapsed {
   max-height: 0;
   opacity: 0;
+  visibility: hidden;
   transform: translateY(-20px);
   margin-top: 0;
   margin-bottom: 0;
@@ -804,10 +846,18 @@ footer {
   font-size: 0.8rem;
   color: var(--primary);
   text-decoration: none;
-  letter-spacing: 1px;
-  opacity: 0.6;
+  letter-spacing: 1.5px;
+  opacity: 0.9;
+  background: transparent;
+  border: none;
   transition: all 0.3s ease;
   cursor: pointer;
+}
+
+.view-evidence-btn::before {
+  content: '// ';
+  color: var(--primary);
+  transition: margin-right 0.3s ease;
 }
 
 .view-evidence-btn:hover {
@@ -851,17 +901,35 @@ footer {
   position: absolute;
   top: 30px;
   right: 40px;
-  color: var(--text-main);
-  font-size: 40px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(7, 7, 10, 0.6);
+  border: 1px solid rgba(0, 255, 159, 0.2);
+  border-radius: 50%;
+  color: var(--primary);
+  font-size: 28px;
   font-weight: 300;
-  transition: 0.3s;
+  line-height: 1;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   z-index: 2010;
+  box-shadow: 0 0 12px rgba(0, 255, 159, 0.05);
 }
 
 .lightbox-close:hover {
-  color: var(--accent);
-  text-shadow: 0 0 10px var(--accent);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--dark-bg);
+  box-shadow: 0 0 20px rgba(255, 61, 0, 0.4);
+  transform: rotate(90deg);
+}
+
+.lightbox-close:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
 }
 
 #lightbox-caption {
@@ -1052,7 +1120,7 @@ footer {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .form-group input:focus,
@@ -1096,4 +1164,135 @@ footer {
   color: var(--secondary);
   opacity: 1;
   text-shadow: 0 0 8px rgba(0, 176, 255, 0.3);
+}
+
+/* === Estilos Adicionales del Plan de Mejoras === */
+
+/* Contenedores de Imágenes en Tarjetas de Proyectos */
+.project-img-container {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  background: var(--darker-bg);
+}
+
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.75;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: saturate(0.8) contrast(1.1);
+}
+
+.project-card:hover .project-img {
+  opacity: 0.95;
+  transform: scale(1.05);
+  filter: saturate(1.1) contrast(1.2);
+}
+
+/* Estilos del Menú Hamburguesa Responsivo */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1010;
+  padding: 0;
+}
+
+.menu-toggle .bar {
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 1px;
+  box-shadow: 0 0 4px rgba(0, 255, 159, 0.3);
+}
+
+/* Modal Estilizado Táctico Único (#cyber-modal) */
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  margin: auto;
+  border: 1px solid rgba(0, 255, 159, 0.3) !important;
+  box-shadow: 0 0 35px rgba(0, 255, 159, 0.15) !important;
+  animation: zoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Media Query Adaptativa Móvil */
+@media screen and (max-width: 768px) {
+  body {
+    cursor: auto !important;
+  }
+  a, button, select, input, textarea, [role="button"], .cyber-btn, .view-evidence-btn, .private-link, .lightbox-close {
+    cursor: pointer !important;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: rgba(3, 3, 5, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 8rem 2.5rem 2rem 2.5rem;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+    border-left: 1px solid rgba(0, 255, 159, 0.15);
+    gap: 2.5rem;
+    visibility: hidden;
+  }
+
+  .nav-links.active {
+    right: 0;
+    visibility: visible;
+  }
+
+  /* Animación Hamburguesa a X */
+  .menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+/* Desactivar animaciones y flashes si se prefiere reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  * {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+  .loader-flash-bg.flash-active {
+    opacity: 0 !important;
+  }
+  .ring-1, .ring-2 {
+    animation: none !important;
+  }
 }
