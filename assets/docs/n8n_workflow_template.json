@@ -1,0 +1,268 @@
+{
+  "name": "GOTO10 - Podcasts de Google Drive",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "podcasts-list",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "1aa35f8e-d831-419b-a083-d922a6111f1c",
+      "name": "Webhook Listar",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        200,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.body.password}}",
+              "value2": "instructor2026"
+            }
+          ]
+        }
+      },
+      "id": "a6713e2f-5f5f-4d32-9cb7-6421cde5e324",
+      "name": "Validar Clave Listar",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        420,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "list",
+        "useQueryString": true,
+        "queryString": "name contains '.mp3' or name contains '.m4a' or name contains '.wav' or mimeType contains 'audio/'",
+        "options": {
+          "corpora": "user",
+          "fields": [
+            "files(id, name, mimeType)"
+          ]
+        }
+      },
+      "id": "b1b0d2d3-98ab-49ef-b31c-99cba4567890",
+      "name": "Google Drive (Listar)",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [
+        640,
+        180
+      ],
+      "notesInFlow": true,
+      "notes": "IMPORTANTE: Para limitar a tu carpeta 'Curso de isntructor de tiro', puedes añadir a la query:\n'ID_DE_TU_CARPETA' in parents"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"files\": {{$json}}\n}",
+        "options": {}
+      },
+      "id": "c1c1c1c1-2222-3333-4444-555555555555",
+      "name": "Responder Lista",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        860,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"success\": false,\n  \"error\": \"Acceso denegado. Clave incorrecta.\"\n}",
+        "options": {
+          "responseCode": 403
+        }
+      },
+      "id": "d2d2d2d2-3333-4444-5555-666666666666",
+      "name": "Responder Error Listar",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        640,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "path": "podcasts-stream",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "e3e3e3e3-4444-5555-6666-777777777777",
+      "name": "Webhook Stream",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        200,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.query.pass}}",
+              "value2": "instructor2026"
+            }
+          ]
+        }
+      },
+      "id": "f4f4f4f4-5555-6666-7777-888888888888",
+      "name": "Validar Clave Stream",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        420,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "fileId": "={{$json.query.id}}"
+      },
+      "id": "a5a5a5a5-6666-7777-8888-999999999999",
+      "name": "Google Drive (Descargar)",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [
+        640,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "binary",
+        "responseBody": "data",
+        "options": {
+          "options": [
+            {
+              "name": "Content-Type",
+              "value": "audio/mpeg"
+            }
+          ]
+        }
+      },
+      "id": "b6b6b6b6-7777-8888-9999-000000000000",
+      "name": "Responder Audio Stream",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        860,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Acceso restringido.",
+        "options": {
+          "responseCode": 403
+        }
+      },
+      "id": "c7c7c7c7-8888-9999-0000-111111111111",
+      "name": "Responder Error Stream",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        640,
+        640
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Listar": {
+      "main": [
+        [
+          {
+            "node": "Validar Clave Listar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar Clave Listar": {
+      "main": [
+        [
+          {
+            "node": "Google Drive (Listar)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder Error Listar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive (Listar)": {
+      "main": [
+        [
+          {
+            "node": "Responder Lista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Stream": {
+      "main": [
+        [
+          {
+            "node": "Validar Clave Stream",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar Clave Stream": {
+      "main": [
+        [
+          {
+            "node": "Google Drive (Descargar)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder Error Stream",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive (Descargar)": {
+      "main": [
+        [
+          {
+            "node": "Responder Audio Stream",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "id": "goto10-podcasts-drive"
+}
