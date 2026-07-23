@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALUAPROBA | Asociación de Legítimos Usuarios de Armas de la Prov. de Bs. As.</title>
+  <meta name="description" content="Asociación Civil dedicada a la defensa institucional, legal y deportiva de los Legítimos Usuarios de Armas en la Provincia de Buenos Aires. Entidad integrada en FLUAA.">
+  
+  <!-- Favicon Oficial -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  
+  <!-- Tipografía Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- CSS Principal -->
+  <link rel="stylesheet" href="styles/main.css">
+  
+  <!-- Script de interacción -->
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <!-- Top Announcement Bar / Topbar Status -->
+  <div class="topbar">
+    <div class="container topbar-container">
+      <div class="topbar-left">
+        <span class="status-indicator">
+          <span class="status-dot"></span>
+          <span class="status-text">Asociación Activa e Integrante Directa de <strong>FLUAA</strong></span>
+        </span>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-info">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Provincia de Buenos Aires, Argentina
+        </span>
+        <a href="mailto:info@aluaproba.ar" class="topbar-link">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          info@aluaproba.ar
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Glassmorphic -->
+  <header class="navbar-header" id="headerNav">
+    <div class="container nav-container">
+      <!-- Brand Logo Oficial -->
+      <a href="#inicio" class="brand-logo" aria-label="ALUAPROBA Inicio">
+        <img src="assets/images/logo_transparent_full_color.png" alt="ALUAPROBA Logo Oficial" class="brand-logo-img">
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+          <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+          <li><a href="#decalogo" class="nav-link">Decálogo LLUU</a></li>
+          <li><a href="#membresia" class="nav-link">Membresía</a></li>
+          <li><a href="#directiva" class="nav-link">Comisión</a></li>
+          <li><a href="#faq" class="nav-link">FAQ & Contacto</a></li>
+        </ul>
+      </nav>
+
+      <!-- CTA Actions -->
+      <div class="nav-actions">
+        <a href="https://sociosonline.ar/aluaproba/socios/" target="_blank" rel="noopener" class="btn btn-portal">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+          Portal Socios
+        </a>
+        <button class="mobile-toggle" id="mobileToggleBtn" aria-label="Abrir Menú de Navegación">
+          <span class="toggle-bar"></span>
+          <span class="toggle-bar"></span>
+          <span class="toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION INSTITUCIONAL DEPORTIVO -->
+    <section id="inicio" class="hero-section">
+      <div class="hero-bg-lights">
+        <div class="light-blob light-blob-1"></div>
+        <div class="light-blob light-blob-2"></div>
+        <div class="light-grid-pattern"></div>
+      </div>
+
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="hero-badge reveal-item">
+            <span class="badge-icon">🏛️</span>
+            <span>Asociación Civil Sin Fines de Lucro • Personería Jurídica</span>
+          </div>
+
+          <h1 class="hero-heading reveal-item">
+            Defendemos la <span class="heading-gradient-celeste">Legalidad</span>, el <span class="heading-gradient-gold">Tiro Deportivo</span> y tus <span class="heading-gradient-blue">Derechos</span>
+          </h1>
+
+          <p class="hero-lead reveal-item">
+            Unimos a los Legítimos Usuarios de Armas de la Provincia de Buenos Aires en un frente institucional sólido, promoviendo la educación, el uso seguro, la camaradería y la estricta vigencia del orden constitucional.
+          </p>
+
+          <div class="hero-buttons reveal-item">
+            <a href="#membresia" class="btn btn-primary btn-lg">
+              <span>Asociarme Ahora</span>
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            <a href="#decalogo" class="btn btn-secondary btn-lg">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              <span>Explorar Decálogo</span>
+            </a>
+          </div>
+
+          <!-- Institutional Banner Mini -->
+          <div class="fluaa-strip reveal-item">
+            <div class="fluaa-badge">FLUAA</div>
+            <div class="fluaa-text">
+              Co-fundadores e integrantes activos de la <strong>Federación de Legítimos Usuarios de Armas Argentina</strong> junto a 18 provincias.
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Stats Cards Grid -->
+        <div class="hero-stats-wrapper reveal-item">
+          <div class="stats-card-glass">
+            <div class="stat-icon stat-icon-blue">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m-4 0V11m0 0l-3 3m3-3l3 3"/></svg>
+            </div>
+            <div class="stat-number-wrap">
+              <span class="stat-number" data-target="19">+19</span>
+            </div>
+            <div class="stat-title">Asociaciones Integradas</div>
+            <div class="stat-desc">Red federal en la República Argentina</div>
+          </div>
+
+          <div class="stats-card-glass">
+            <div class="stat-icon stat-icon-gold">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <div class="stat-number-wrap">
+              <span class="stat-number" data-target="20">20</span>
+            </div>
+            <div class="stat-title">Pilares Éticos</div>
+            <div class="stat-desc">Código moral y legal del Decálogo LLUU</div>
+          </div>
+
+          <div class="stats-card-glass">
+            <div class="stat-icon stat-icon-cyan">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 4.12A13.98 13.98 0 0112 21c-2.427 0-4.714-.645-6.697-1.777M12 3c-4.97 0-9 4.03-9 9 0 2.12.735 4.07 1.967 5.615"/></svg>
+            </div>
+            <div class="stat-number-wrap">
+              <span class="stat-number">100%</span>
+            </div>
+            <div class="stat-title">Defensa Constitucional</div>
+            <div class="stat-desc">Aptitud legal, médica y sin antecedentes</div>
+          </div>
+
+          <div class="stats-card-glass">
+            <div class="stat-icon stat-icon-dark">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            </div>
+            <div class="stat-number-wrap">
+              <span class="stat-number">PBA</span>
+            </div>
+            <div class="stat-title">Base Territorial</div>
+            <div class="stat-desc">Representación integral en la provincia</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN NOSOTROS Y 5 PILARES FUNDAMENTALES -->
+    <section id="nosotros" class="section-padding bg-metallic">
+      <div class="container">
+        <div class="section-head text-center reveal-item">
+          <div class="badge-pill">Nuestra Misión Institucional</div>
+          <h2 class="section-title">Compromiso, Identidad y Representación</h2>
+          <p class="section-subtitle">
+            ALUAPROBA fue fundada por ciudadanos respetuosos de la ley para canalizar la defensa técnica, legal y moral de los usuarios con CLU vigente en la Provincia de Buenos Aires.
+          </p>
+        </div>
+
+        <!-- 5 Pilares Grid Layout Editorial -->
+        <div class="pilares-grid">
+          <!-- Pilar 1: Tiro Deportivo -->
+          <div class="pilar-card glass-card reveal-item">
+            <div class="pilar-img-wrap">
+              <img src="assets/images/pilar_tiro_deportivo.jpg" alt="Tiro Deportivo y Olímpico" class="pilar-img">
+            </div>
+            <div class="pilar-header">
+              <span class="pilar-num">01</span>
+              <div class="pilar-icon icon-blue">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+            </div>
+            <h3 class="pilar-title">Tiro Deportivo y Olímpico</h3>
+            <p class="pilar-text">
+              Fomentamos la práctica del tiro en sus diversas disciplinas deportivas, apoyando a los Tiros Federales, polígonos y clubes de tiro en toda la provincia como espacios de alta competencia y disciplina.
+            </p>
+            <div class="pilar-tag">Disciplinas Oficiales</div>
+          </div>
+
+          <!-- Pilar 2: Caza Responsable -->
+          <div class="pilar-card glass-card reveal-item">
+            <div class="pilar-img-wrap">
+              <img src="assets/images/pilar_caza_responsable.jpg" alt="Caza Responsable y Sustentable" class="pilar-img">
+            </div>
+            <div class="pilar-header">
+              <span class="pilar-num">02</span>
+              <div class="pilar-icon icon-gold">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h1.5a2.5 2.5 0 002.5-2.5V14M11 18a2 2 0 100-4 2 2 0 000 4z"/></svg>
+              </div>
+            </div>
+            <h3 class="pilar-title">Caza Responsable y Sustentable</h3>
+            <p class="pilar-text">
+              Promovemos la actividad cinegética en estricto cumplimiento de las normas de conservación, temporadas legalmente habilitadas y el máximo respeto por el medio ambiente y la fauna nativa.
+            </p>
+            <div class="pilar-tag">Conservación & Ley</div>
+          </div>
+
+          <!-- Pilar 3: Defensa Constitucional -->
+          <div class="pilar-card glass-card pilar-featured reveal-item">
+            <div class="pilar-header">
+              <span class="pilar-num">03</span>
+              <div class="pilar-icon icon-dark">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l9-4 9 4v6c0 5.55-3.84 10.74-9 12-5.16-1.26-9-5.45-9-12V6z"/></svg>
+              </div>
+            </div>
+            <h3 class="pilar-title">Defensa Constitucional (Art. 14 y 21)</h3>
+            <p class="pilar-text">
+              Resguardamos el derecho constitucional a la propiedad, el trabajo y la petición ante las autoridades. Representamos colectivamente a los usuarios ante trabas burocráticas o arbitrarias.
+            </p>
+            <div class="pilar-tag badge-dark-tag">Constitución Nacional</div>
+          </div>
+
+          <!-- Pilar 4: Seguridad y Custodia -->
+          <div class="pilar-card glass-card reveal-item">
+            <div class="pilar-img-wrap">
+              <img src="assets/images/pilar_seguridad_guarda.jpg" alt="Seguridad y Guarda Eficiente" class="pilar-img">
+            </div>
+            <div class="pilar-header">
+              <span class="pilar-num">04</span>
+              <div class="pilar-icon icon-cyan">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              </div>
+            </div>
+            <h3 class="pilar-title">Seguridad y Guarda Eficiente</h3>
+            <p class="pilar-text">
+              Difundimos normas estrictas de guardado en armeros o cajas de seguridad, manipulación segura y prevención total para asegurar que ningún arma esté al alcance de menores o personas no idóneas.
+            </p>
+            <div class="pilar-tag">Idoneidad & Prevención</div>
+          </div>
+
+          <!-- Pilar 5: Familia y Tradición -->
+          <div class="pilar-card glass-card reveal-item">
+            <div class="pilar-img-wrap">
+              <img src="assets/images/pilar_tradicion_patria.jpg" alt="Familia, Tradición y Héroes de Malvinas" class="pilar-img">
+            </div>
+            <div class="pilar-header">
+              <span class="pilar-num">05</span>
+              <div class="pilar-icon icon-gold">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.684a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+              </div>
+            </div>
+            <h3 class="pilar-title">Familia, Tradición y Héroes Patria</h3>
+            <p class="pilar-text">
+              Honramos las costumbres argentinas, el encuentro familiar y rendimos homenaje permanente e inclaudicable a los valerosos Veteranos de la Guerra de Malvinas.
+            </p>
+            <div class="pilar-tag">Honor & Héroes de Malvinas</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MANUAL INTERACTIVO DEL DECÁLOGO LLUU -->
+    <section id="decalogo" class="section-padding bg-light">
+      <div class="container">
+        <div class="section-head text-center reveal-item">
+          <div class="badge-pill">Código Ético e Institucional</div>
+          <h2 class="section-title">Decálogo del Legítimo Usuario</h2>
+          <p class="section-subtitle">
+            Conoce los 20 pilares fundamentales que dictan nuestra conducta como ciudadanos pacíficos, idóneos y respetuosos de la ley.
+          </p>
+        </div>
+
+        <!-- Decálogo Controls: Tab Filter & Live Search Bar -->
+        <div class="decalogo-controls glass-panel reveal-item">
+          <div class="decalogo-tabs" id="decalogoTabs">
+            <button class="decalogo-tab-btn active" data-category="all">
+              <span>Todos los Pilares</span>
+              <span class="tab-count">20</span>
+            </button>
+            <button class="decalogo-tab-btn" data-category="leyes">
+              <span>Leyes y Democracia</span>
+              <span class="tab-count">8</span>
+            </button>
+            <button class="decalogo-tab-btn" data-category="deporte">
+              <span>Deporte y Pasión</span>
+              <span class="tab-count">4</span>
+            </button>
+            <button class="decalogo-tab-btn" data-category="seguridad">
+              <span>Seguridad y Custodia</span>
+              <span class="tab-count">2</span>
+            </button>
+            <button class="decalogo-tab-btn" data-category="valores">
+              <span>Valores y Tradición</span>
+              <span class="tab-count">6</span>
+            </button>
+          </div>
+
+          <div class="decalogo-search">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="decalogoSearchInput" placeholder="Buscar en los 20 puntos (ej. Malvinas, Ley, Armas...)" aria-label="Buscar en el Decálogo">
+            <button id="clearSearchBtn" class="clear-search-btn" title="Limpiar búsqueda" style="display:none;">✕</button>
+          </div>
+        </div>
+
+        <!-- Decálogo Interactive Cards Container -->
+        <div class="decalogo-grid" id="decalogoGrid">
+          <!-- Item 1 -->
+          <article class="decalogo-item glass-card" data-category="leyes" data-id="1">
+            <div class="item-head">
+              <span class="item-number">01</span>
+              <span class="item-badge badge-leyes">Leyes y Democracia</span>
+            </div>
+            <p class="item-body">
+              Somos respetuosos de la Ley, declarando forma de vida laboral, buena conducta y aptitud física y mental comprobada.
+            </p>
+          </article>
+
+          <!-- Item 2 -->
+          <article class="decalogo-item glass-card" data-category="valores" data-id="2">
+            <div class="item-head">
+              <span class="item-number">02</span>
+              <span class="item-badge badge-valores">Valores y Tradición</span>
+            </div>
+            <p class="item-body">
+              Somos gente pacífica de profundo sentido familiar y comunitario, absolutamente alejados de cualquier forma de violencia.
+            </p>
+          </article>
+
+          <!-- Item 3 -->
+          <article class="decalogo-item glass-card" data-category="deporte" data-id="3">
+            <div class="item-head">
+              <span class="item-number">03</span>
+              <span class="item-badge badge-deporte">Deporte y Pasión</span>
+            </div>
+            <p class="item-body">
+              Concebimos las armas como elementos deportivos, pasatiempo, colección o pasión. Jamás para dañar a terceros.
+            </p>
+          </article>
+
+          <!-- Item 4 -->
+          <article class="decalogo-item glass-card" data-category="leyes" data-id="4">
+            <div class="item-head">
+              <span class="item-number">04</span>
+              <span class="item-badge badge-leyes">Leyes y Democracia</span>
+            </div>
+            <p class="item-body">
+              Obedecemos la Ley y las autoridades legalmente constituidas en pleno ejercicio y defensa de la Democracia.
+            </p>
+          </article>
+
+          <!-- Item 5 -->
+          <article class="decalogo-item glass-card" data-category="valores" data-id="5">
+            <div class="item-head">
+              <span class="item-number">05</span>
+              <span class="item-badge badge-valores">Valores y Tradición</span>
+            </div>
+            <p class="item-body">
+              Repudiamos la violencia de cualquier índole o su apología, venga de donde venga y bajo cualquier pretexto.
+            </p>
+          </article>
+
+          <!-- Item 6 -->
+          <article class="decalogo-item glass-card" data-category="leyes" data-id="6">
+            <div class="item-head">
+              <span class="item-number">06</span>
+              <span class="item-badge badge-leyes">Leyes y Democracia</span>
+            </div>
+            <p class="item-body">
+              Fervientes defensores del Orden Institucional y Constitucional de la República Argentina.
+            </p>
+          </article>
+
+          <!-- Item 7 -->
+          <article class="decalogo-item glass-card" data-category="leyes" data-id="7">
+            <div class="item-head">
+              <span class="item-number">07</span>
+              <span class="item-badge badge-leyes">Leyes y Democracia</span>
+            </div>
+            <p class="item-body">
+              Respetamos a las Autoridades electas por el voto soberano del pueblo del cual somos parte integrante.
+            </p>
+          </article>
+
+          <!-- Item 8 -->
+          <article class="decalogo-item glass-card" data-category="leyes" data-id="8">
+            <div class="item-head">
+              <span class="item-number">08</span>
+              <span class="item-badge badge-leyes">Leyes y Democracia</span>
+            </div>
+            <p class="item-body">
+              Somos defensores de la Igualdad Ante la Ley y el respeto absoluto por los Derechos de los Demás.
+            </p>
+          </article>
+
+          <!-- Item 9 -->
+          <article class="decalogo-item glass-card" data-category="valores" data-id="9">
+            <div class="item-head">
+              <span class="item-number">09</span>
+              <span class="item-badge badge-valores">Valores y Tradición</span>
+            </div>
+            <p class="item-body">
+              Sumamente respetuosos de la vida humana, la dignidad de las personas y la protección de la naturaleza.
+            </p>
+          </article>
+
+          <!-- Item 10 -->
+          <article class="decalogo-item glass-card" data-category="seguridad" data-id="10">
+            <div class="item-head">
+              <span class="item-number">10</span>
+              <span class="item-badge badge-seguridad">Seguridad y Custodia</span>
+            </div>
+            <p class="item-body">
+              Mantenemos nuestras armas celosamente custodiadas fuera del alcance de niños, terceros o personas no idóneas.
+            </p>
+          </article>
+
+          <!-- Item 11 -->
+          <article class="decalogo-item glass-card" data-category="deporte" data-id="11">
+            <div class="item-head">
+              <span class="item-number">11</span>
+              <span class="item-badge badge-deporte">Deporte y Pasión</span>
+            </div>
+            <p class="item-body">
+              No pretendemos armar a nadie ni realizamos campañas coercitivas de ningún tipo.
+            </p>
+          </article>
+
+          <!-- Item 12 -->
+          <article class="decalogo-item glass-card" data-category="valores" data-id="12">
+            <div class="item-head">
+              <span class="item-number">12</span>
+              <span class="item-badge badge-valores">Valores y Tradición</span>
+            </div>
+            <p class="item-body">
+              Fomentamos la camaradería, la amistad sincera y el profundo respeto mutuo en cada encuentro.
+            </p>
+          </article>
+
+          <!-- Item 13 -->
+          <article class="decalogo-item glass-card" data-category="valores" data-id="13">
+            <div class="item-head">
+              <span class="item-number">13</span>
+              <span class="item-badge badge-valores">Valores y Tradición</span>
+            </div>
+            <p class="item-body">
+              Rechazamos enfáticamente el racismo, la discriminación y los regímenes totalitarios de cualquier especie.
+            </p>
+          </article>
+
+          <!-- Item 14 -->
+          <article class="decalogo-item glass-card" data-category="leyes" data-id="14">
+            <div class="item-head">
+              <span class="item-number">14</span>
+              <span class="item-badge badge-leyes">Leyes y Democracia</span>
+            </div>
+            <p class="item-body">
+              No hacemos justicia por mano propia ni propiciamos la libre portación irresponsable o al margen de la ley.
+            </p>
+          </article>
+
+          <!-- Item 15 -->
+          <article class="decalogo-item glass-card" data-category="deporte" data-id="15">
+            <div class="item-head">
+              <span class="item-number">15</span>
+              <span class="item-badge badge-deporte">Deporte y Pasión</span>
+            </div>
+            <p class="item-body">
+              Brindamos solidaridad constante con los Tiros Federales, Foros y Asociaciones afines de todo el país.
+            </p>
+          </article>
+
+          <!-- Item 16 -->
+          <article class="decalogo-item glass-card" data-category="leyes" data-id="16">
+            <div class="item-head">
+              <span class="item-number">16</span>
+              <span class="item-badge badge-leyes">Leyes y Democracia</span>
+            </div>
+            <p class="item-body">
+              Somos firmes partidarios de la erradicación y combate efectivo contra el circuito de armas ilegales y la delincuencia.
+            </p>
+          </article>
+
+          <!-- Item 17 -->
+          <article class="decalogo-item glass-card" data-category="leyes" data-id="17">
+            <div class="item-head">
+              <span class="item-number">17</span>
+              <span class="item-badge badge-leyes">Leyes y Democracia</span>
+            </div>
+            <p class="item-body">
+              Buscamos consensuar y colaborar activamente con el Estado para un control debidamente idóneo, justo y moderno.
+            </p>
+          </article>
+
+          <!-- Item 18 -->
+          <article class="decalogo-item glass-card" data-category="deporte" data-id="18">
+            <div class="item-head">
+              <span class="item-number">18</span>
+              <span class="item-badge badge-deporte">Deporte y Pasión</span>
+            </div>
+            <p class="item-body">
+              Somos defensores de nuestras Tradiciones Nacionales, historia patriótica e imparcialidad institucional.
+            </p>
+          </article>
+
+          <!-- Item 19 -->
+          <article class="decalogo-item glass-card" data-category="valores" data-id="19">
+            <div class="item-head">
+              <span class="item-number">19</span>
+              <span class="item-badge badge-valores">Valores y Tradición</span>
+            </div>
+            <p class="item-body">
+              Gente de buena fe, padres, madres y ciudadanos honrados que defienden la Patria y su Pueblo.
+            </p>
+          </article>
+
+          <!-- Item 20 -->
+          <article class="decalogo-item glass-card" data-category="valores" data-id="20">
+            <div class="item-head">
+              <span class="item-number">20</span>
+              <span class="item-badge badge-valores">Valores y Tradición</span>
+            </div>
+            <p class="item-body">
+              Rendimos un reconocimiento eterno, permanente e inclaudicable a nuestros valerosos Veteranos de Guerra de Malvinas.
+            </p>
+          </article>
+        </div>
+
+        <div id="noResultsMsg" class="no-results-box" style="display: none;">
+          <p>No se encontraron puntos del decálogo que coincidan con la búsqueda.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TARJETAS DE MEMBRESÍA DEPORTIVA -->
+    <section id="membresia" class="section-padding bg-metallic">
+      <div class="container">
+        <div class="section-head text-center reveal-item">
+          <div class="badge-pill">Unite a ALUAPROBA</div>
+          <h2 class="section-title">Categorías de Membresía</h2>
+          <p class="section-subtitle">
+            Con tu cuota social fortaleces la representación legal colectiva y permites que sigamos defendiendo nuestros derechos.
+          </p>
+        </div>
+
+        <div class="membership-grid">
+          <!-- Card 1: Socio Activo (Featured) -->
+          <div class="pricing-card featured-pricing reveal-item">
+            <div class="ribbon-popular">Recomendado</div>
+            <div class="pricing-header">
+              <div class="tier-type">Socio Activo</div>
+              <p class="tier-sub">Para Legítimos Usuarios con CLU vigente o en trámite que buscan participación plena.</p>
+              
+              <div class="tier-price">
+                <span class="currency">$</span>
+                <span class="amount">4.000</span>
+                <span class="period">/ mes</span>
+              </div>
+            </div>
+
+            <ul class="tier-feature-list">
+              <li>
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Representación legal e institucional directa</span>
+              </li>
+              <li>
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Acceso ilimitado al <strong>Portal de Socios Online</strong></span>
+              </li>
+              <li>
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Derecho a voz y voto en Asambleas de la Asociación</span>
+              </li>
+              <li>
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Credencial Digital de Socio Activo de ALUAPROBA</span>
+              </li>
+              <li>
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Asesoramiento en trámites de tenencia ante RENAR</span>
+              </li>
+            </ul>
+
+            <div class="pricing-cta">
+              <a href="http://sociosonline.ar/aluaproba/asociacion" target="_blank" rel="noopener" class="btn btn-gold btn-block">
+                <span>Completar Formulario de Socio Activo</span>
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2: Socio Adherente -->
+          <div class="pricing-card standard-pricing reveal-item">
+            <div class="pricing-header">
+              <div class="tier-type">Socio Adherente</div>
+              <p class="tier-sub">Para simpatizantes, familiares o tiradores en inicio de actividad.</p>
+              
+              <div class="tier-price">
+                <span class="currency"></span>
+                <span class="amount">Gratuito</span>
+                <span class="period">/ sin cuota fija</span>
+              </div>
+            </div>
+
+            <ul class="tier-feature-list">
+              <li>
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Integración a la comunidad defensora de LLUU</span>
+              </li>
+              <li>
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Suscripción al boletín informativo y alertas legales</span>
+              </li>
+              <li>
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Respaldo a iniciativas contra medidas coercitivas de desarme</span>
+              </li>
+              <li>
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Participación en eventos comunitarios y actividades abiertas</span>
+              </li>
+            </ul>
+
+            <div class="pricing-cta">
+              <a href="http://sociosonline.ar/aluaproba/asociacion" target="_blank" rel="noopener" class="btn btn-outline-dark btn-block">
+                <span>Inscribirme como Socio Adherente</span>
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="security-note glass-panel text-center reveal-item">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          <span>El proceso de alta se realiza de forma 100% segura mediante nuestra plataforma oficial en <strong>sociosonline.ar</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUADRÍCULA DE LA COMISIÓN DIRECTIVA -->
+    <section id="directiva" class="section-padding bg-light">
+      <div class="container">
+        <div class="section-head text-center reveal-item">
+          <div class="badge-pill">Conducción Institucional</div>
+          <h2 class="section-title">Comisión Directiva</h2>
+          <p class="section-subtitle">
+            Autoridades electas que lideran la gestión, representación jurídica y administración de ALUAPROBA.
+          </p>
+        </div>
+
+        <div class="directiva-grid">
+          <!-- Miembro 1 -->
+          <div class="member-card glass-card reveal-item">
+            <div class="member-avatar avatar-president">
+              <span>LG</span>
+            </div>
+            <h3 class="member-name">Luis German Gorchs</h3>
+            <div class="member-role role-president">Presidente</div>
+            <div class="member-divider"></div>
+            <p class="member-bio">Representante Institucional y Conducción General de la Asociación Civil ALUAPROBA.</p>
+          </div>
+
+          <!-- Miembro 2 -->
+          <div class="member-card glass-card reveal-item">
+            <div class="member-avatar avatar-vice">
+              <span>LT</span>
+            </div>
+            <h3 class="member-name">Laura Cristina Tripodi</h3>
+            <div class="member-role role-vice">Vice Presidente</div>
+            <div class="member-divider"></div>
+            <p class="member-bio">Coordinación de Relaciones Institucionales y Proyectos de Integración.</p>
+          </div>
+
+          <!-- Miembro 3 -->
+          <div class="member-card glass-card reveal-item">
+            <div class="member-avatar avatar-sec">
+              <span>DB</span>
+            </div>
+            <h3 class="member-name">Diego Alejandro Brea</h3>
+            <div class="member-role">Secretario</div>
+            <div class="member-divider"></div>
+            <p class="member-bio">Administración de Actas, Registros y Comunicación con Asociados.</p>
+          </div>
+
+          <!-- Miembro 4 -->
+          <div class="member-card glass-card reveal-item">
+            <div class="member-avatar avatar-sec">
+              <span>FM</span>
+            </div>
+            <h3 class="member-name">Federico Matias Moreno Terrero</h3>
+            <div class="member-role">Pro - Secretario</div>
+            <div class="member-divider"></div>
+            <p class="member-bio">Soporte Operativo de Secretaría y Vínculos Legales Institucionales.</p>
+          </div>
+
+          <!-- Miembro 5 -->
+          <div class="member-card glass-card reveal-item">
+            <div class="member-avatar avatar-treasurer">
+              <span>OS</span>
+            </div>
+            <h3 class="member-name">Oscar Stocker</h3>
+            <div class="member-role">Tesorero</div>
+            <div class="member-divider"></div>
+            <p class="member-bio">Gestión Financiera, Rendición de Cuentas y Administración de Fondos.</p>
+          </div>
+
+          <!-- Miembro 6 -->
+          <div class="member-card glass-card reveal-item">
+            <div class="member-avatar avatar-treasurer">
+              <span>NS</span>
+            </div>
+            <h3 class="member-name">Néstor Marcelo Senra</h3>
+            <div class="member-role">Pro - Tesorero</div>
+            <div class="member-divider"></div>
+            <p class="member-bio">Asistencia en Tesorería y Supervisión del Padrón de Cuotas Sociales.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ & SECCIÓN DE CONTACTO INTERACTIVO -->
+    <section id="faq" class="section-padding bg-metallic">
+      <div class="container">
+        <div class="grid-2-columns">
+          <!-- Columna FAQ -->
+          <div class="faq-column reveal-item">
+            <div class="badge-pill">Preguntas Frecuentes</div>
+            <h2 class="section-title">Respuestas Clave para Legítimos Usuarios</h2>
+            <p class="section-subtitle-left">
+              Resolvemos tus dudas sobre nuestros fines, la condición de Legítimo Usuario y cómo formar parte de la asociación.
+            </p>
+
+            <div class="faq-accordion" id="faqAccordion">
+              <!-- Question 1 -->
+              <div class="faq-item active">
+                <button class="faq-trigger" aria-expanded="true">
+                  <span>¿Qué requisitos debo cumplir para ser Legítimo Usuario (CLU)?</span>
+                  <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-content">
+                  <p>Debes acreditar ante la RENAR medio de vida lícito, inexistencia de antecedentes penales, idoneidad en el manejo de armas con instructor matriculado, y aprobar la evaluación de aptitud psícofísica médica legal correspondiente.</p>
+                </div>
+              </div>
+
+              <!-- Question 2 -->
+              <div class="faq-item">
+                <button class="faq-trigger" aria-expanded="false">
+                  <span>¿Por qué es importante asociarme a ALUAPROBA?</span>
+                  <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-content">
+                  <p>La unión hace la fuerza. Como individuo aislado es complejo hacer frente a demoras infundadas o reglamentaciones restrictivas. ALUAPROBA te brinda representación legal colectiva, presencia institucional y el respaldo de la Federación Argentina FLUAA.</p>
+                </div>
+              </div>
+
+              <!-- Question 3 -->
+              <div class="faq-item">
+                <button class="faq-trigger" aria-expanded="false">
+                  <span>¿Qué función cumple la Federación FLUAA?</span>
+                  <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-content">
+                  <p>FLUAA nuclea a más de 19 asociaciones de legítimos usuarios de todo el país para tener una voz unificada ante los organismos gubernamentales, legisladores y medios de comunicación a nivel nacional.</p>
+                </div>
+              </div>
+
+              <!-- Question 4 -->
+              <div class="faq-item">
+                <button class="faq-trigger" aria-expanded="false">
+                  <span>¿Cómo se realiza el pago de la cuota de Socio Activo?</span>
+                  <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-content">
+                  <p>A través del Portal Oficial <strong>sociosonline.ar/aluaproba</strong> puedes gestionar tu cuota mediante débito automático, transferencia bancaria o medios de pago digitales de forma transparente y automatizada.</p>
+                </div>
+              </div>
+
+              <!-- Question 5 -->
+              <div class="faq-item">
+                <button class="faq-trigger" aria-expanded="false">
+                  <span>¿ALUAPROBA promueve la libre portación de armas?</span>
+                  <svg class="faq-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="faq-content">
+                  <p>No. De acuerdo con el Punto 14 de nuestro Decálogo, no hacemos justicia por mano propia ni propiciamos la libre portación irresponsable. Promovemos la tenencia legal, idónea y responsable para tiro deportivo, caza y custodia segura.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna Formulario de Contacto -->
+          <div class="contact-column reveal-item">
+            <div class="contact-card glass-panel-elevated">
+              <div class="contact-header">
+                <h3 class="contact-title">Contacto Directo Institucional</h3>
+                <p class="contact-desc">Déjanos tu mensaje o consulta y el equipo directivo te responderá a la brevedad.</p>
+              </div>
+
+              <form id="contactForm" class="contact-form" novalidate>
+                <div class="form-group">
+                  <label for="contactName" class="form-label">Nombre y Apellido *</label>
+                  <input type="text" id="contactName" name="name" required class="form-input" placeholder="Ej. Juan Manuel Pérez">
+                  <span class="form-error-text">Por favor ingresa tu nombre completo.</span>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="contactEmail" class="form-label">Correo Electrónico *</label>
+                    <input type="email" id="contactEmail" name="email" required class="form-input" placeholder="tu@email.com">
+                    <span class="form-error-text">Ingresa un correo electrónico válido.</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="contactPhone" class="form-label">Teléfono / WhatsApp</label>
+                    <input type="tel" id="contactPhone" name="phone" class="form-input" placeholder="11 1234-5678">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="contactReason" class="form-label">Motivo de Consulta *</label>
+                  <select id="contactReason" name="reason" required class="form-select">
+                    <option value="">Selecciona una opción...</option>
+                    <option value="socio">Quiero asociarme / Dudas de Membresía</option>
+                    <option value="legal">Asesoramiento Legal / Trámites RENAR</option>
+                    <option value="prensa">Prensa / Relaciones Institucionales</option>
+                    <option value="otro">Otro motivo</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="contactMessage" class="form-label">Mensaje *</label>
+                  <textarea id="contactMessage" name="message" rows="4" required class="form-textarea" placeholder="Escribe aquí tu consulta o inquietud..."></textarea>
+                  <span class="form-error-text">Por favor redacta tu mensaje.</span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="submitBtn">
+                  <span>Enviar Mensaje Institucional</span>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER INSTITUCIONAL MODERNIZADO -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <!-- Columna 1: Brand & Misión -->
+        <div class="footer-brand-col">
+          <a href="#inicio" class="brand-logo footer-logo" aria-label="ALUAPROBA Inicio">
+            <img src="assets/images/logo_white.png" alt="ALUAPROBA Logo Oficial Blanco" class="footer-logo-img">
+          </a>
+          <p class="footer-desc">
+            Asociación Civil dedicada al agrupamiento, representación jurídica y defensa de los derechos de los Legítimos Usuarios de Armas en la Provincia de Buenos Aires.
+          </p>
+          <div class="footer-fluaa-badge">
+            <span>🇦🇷 Entidad Miembro Fundador de <strong>FLUAA</strong></span>
+          </div>
+        </div>
+
+        <!-- Columna 2: Navegación Rápida -->
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Navegación</h4>
+          <ul class="footer-links-list">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#nosotros">Nuestra Misión y Pilares</a></li>
+            <li><a href="#decalogo">Manual del Decálogo LLUU</a></li>
+            <li><a href="#membresia">Categorías de Socio</a></li>
+            <li><a href="#directiva">Comisión Directiva</a></li>
+            <li><a href="#faq">Preguntas Frecuentes</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Enlaces Institucionales & Portal -->
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Gestión & Plataforma</h4>
+          <ul class="footer-links-list">
+            <li><a href="https://sociosonline.ar/aluaproba/socios/" target="_blank" rel="noopener">Portal de Socios Online</a></li>
+            <li><a href="http://sociosonline.ar/aluaproba/asociacion" target="_blank" rel="noopener">Formulario de Alta de Socio</a></li>
+            <li><a href="mailto:info@aluaproba.ar">Mesa de Entrada Digital</a></li>
+            <li><a href="#decalogo">Código de Ética Ciudadana</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Contacto Oficial -->
+        <div class="footer-contact-col">
+          <h4 class="footer-heading">Contacto Oficial</h4>
+          <div class="footer-info-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>Provincia de Buenos Aires, República Argentina</span>
+          </div>
+          <div class="footer-info-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <a href="mailto:info@aluaproba.ar">info@aluaproba.ar</a>
+          </div>
+          <div class="footer-info-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+            <a href="https://sociosonline.ar/aluaproba/socios/" target="_blank" rel="noopener">sociosonline.ar/aluaproba</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p>© 2026 ALUAPROBA - Asociación Civil de Legítimos Usuarios de Armas de la Provincia de Buenos Aires. Todos los derechos reservados.</p>
+        <p class="footer-credits">Diseño UI/UX Institucional Modernizado • 100% Responsivo</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification System -->
+  <div id="toastNotification" class="toast-container" role="alert" aria-live="polite"></div>
+
+</body>
+</html>
