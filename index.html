@@ -4,782 +4,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel Hornos | Portafolio Personal</title>
+    <title>GOTO 10 | Sitio en Construcción</title>
 
     <!-- Fuentes Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- CSS Propio -->
-    <link rel="stylesheet" href="css/styles.css?v=2.0">
+    <style>
+        :root {
+            --primary: #00ff9f;
+            --secondary: #00b0ff;
+            --accent: #ff3d00;
+            --dark-bg: #07070a;
+            --darker-bg: #030305;
+            --panel-bg: rgba(7, 7, 10, 0.75);
+            --border-color: rgba(0, 255, 159, 0.2);
+            --text-main: #f5f5f7;
+            --text-muted: #8e8e93;
+            --grid-color: rgba(0, 255, 159, 0.04);
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-brand: 'Orbitron', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+            background-image:
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Retículas y elementos decorativos de precisión táctica */
+        .reticle-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(85vw, 650px);
+            height: min(85vw, 650px);
+            pointer-events: none;
+            opacity: 0.18;
+            z-index: 1;
+        }
+
+        .reticle-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px dashed var(--primary);
+            border-radius: 50%;
+        }
+
+        .ring-1 {
+            width: 75%;
+            height: 75%;
+            animation: spinClockwise 45s linear infinite;
+        }
+
+        .ring-2 {
+            width: 100%;
+            height: 100%;
+            border-style: dotted;
+            animation: spinCounter 65s linear infinite;
+        }
+
+        .reticle-axis-x {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .reticle-axis-y {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, var(--primary), transparent);
+        }
+
+        /* Marcas de Esquina */
+        .corner-mark {
+            position: fixed;
+            width: 25px;
+            height: 25px;
+            border: 1px solid rgba(0, 255, 159, 0.35);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .top-left { top: 25px; left: 25px; border-right: none; border-bottom: none; }
+        .top-right { top: 25px; right: 25px; border-left: none; border-bottom: none; }
+        .bottom-left { bottom: 25px; left: 25px; border-right: none; border-top: none; }
+        .bottom-right { bottom: 25px; right: 25px; border-left: none; border-top: none; }
+
+        /* Contenedor Principal (Tarjeta Táctica) */
+        .card-container {
+            position: relative;
+            z-index: 10;
+            max-width: 680px;
+            width: 100%;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3.5rem 2.5rem;
+            text-align: center;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 255, 159, 0.08);
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Logotipo Superior */
+        .brand-logo {
+            font-family: var(--font-brand);
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+        }
+
+        .brand-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--primary);
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        /* Estado del Sistema */
+        .system-badge {
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            color: var(--primary);
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            display: inline-block;
+            border: 1px solid rgba(0, 255, 159, 0.3);
+            padding: 6px 16px;
+            background: rgba(0, 255, 159, 0.05);
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Títulos */
+        h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(135deg, #ffffff 40%, #a2a2a2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            color: var(--secondary);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.8rem;
+            font-weight: 600;
+        }
+
+        p.description {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            max-width: 540px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Barra de Progreso / Telemetría */
+        .telemetry-box {
+            background: rgba(3, 3, 5, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .telemetry-header {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+        }
+
+        .telemetry-status {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 65%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--primary);
+            animation: scanProgress 2.5s ease-in-out infinite alternate;
+        }
+
+        /* Acciones / Contacto */
+        .actions-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cyber-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--text-main);
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.75rem 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+        }
+
+        .cyber-btn:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 159, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .cyber-btn.accent {
+            background: var(--primary);
+            color: var(--dark-bg);
+            border-color: var(--primary);
+        }
+
+        .cyber-btn.accent:hover {
+            background: transparent;
+            color: var(--primary);
+            box-shadow: 0 0 25px rgba(0, 255, 159, 0.3);
+        }
+
+        /* Pie de página */
+        footer {
+            margin-top: 2.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* Animaciones */
+        @keyframes spinClockwise {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes spinCounter {
+            from { transform: translate(-50%, -50%) rotate(360deg); }
+            to { transform: translate(-50%, -50%) rotate(0deg); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.85); }
+        }
+
+        @keyframes scanProgress {
+            0% { width: 55%; }
+            100% { width: 85%; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .card-container {
+                padding: 2.5rem 1.5rem;
+            }
+            .brand-logo {
+                font-size: 1.6rem;
+            }
+            .cyber-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Pantalla de Carga Táctica (Splash Loader) -->
-    <div id="loader-overlay" class="loader-overlay">
-        <!-- Fondo para destellos rápidos (Flashes) de imágenes -->
-        <div id="loader-flash-bg" class="loader-flash-bg"></div>
-        <div class="loader-content">
-            <div class="loader-title">GOTO 10</div>
-            <div class="loader-subtitle">INICIALIZANDO SISTEMA</div>
-            <div class="loader-bar-container">
-                <div id="loader-progress" class="loader-progress"></div>
-            </div>
-            <div id="loader-status" class="loader-status">CALIBRANDO IMÁGENES... 0%</div>
-        </div>
-    </div>
-    <script>
-        (function() {
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            
-            // Omitir loader por completo si ya se ejecutó en la sesión o si se prefiere reducción de movimiento
-            if (sessionStorage.getItem('loader-played') === 'true' || prefersReducedMotion) {
-                const loader = document.getElementById('loader-overlay');
-                if (loader) {
-                    loader.style.display = 'none';
-                    loader.remove();
-                }
-                return;
-            }
-
-            const imagesToPreload = [
-                'assets/img/hero-profile-bg.jpg',
-                'assets/img/tiro-bg.jpg',
-                'assets/img/projects-bg.png'
-            ];
-            let loadedCount = 0;
-            const totalImages = imagesToPreload.length;
-            const flashBg = document.getElementById('loader-flash-bg');
-
-            const playIntroSequence = () => {
-                let currentStep = 0;
-                
-                const showNextFlash = () => {
-                    if (currentStep >= totalImages) {
-                        // Secuencia terminada, abrimos la página y guardamos estado
-                        setTimeout(() => {
-                            const loader = document.getElementById('loader-overlay');
-                            if (loader) {
-                                loader.classList.add('fade-out');
-                                sessionStorage.setItem('loader-played', 'true');
-                                setTimeout(() => loader.remove(), 500);
-                            }
-                        }, 150);
-                        return;
-                    }
-
-                    // Cargar imagen del paso actual en el fondo
-                    const imgSrc = imagesToPreload[currentStep];
-                    if (flashBg) {
-                        flashBg.style.backgroundImage = `url('${imgSrc}')`;
-                        flashBg.classList.add('flash-active');
-                    }
-
-                    // El destello dura 180ms
-                    setTimeout(() => {
-                        if (flashBg) {
-                            flashBg.classList.remove('flash-active');
-                        }
-                        
-                        currentStep++;
-                        // Pausa corta de 60ms en negro entre destellos
-                        setTimeout(showNextFlash, 60);
-                    }, 180);
-                };
-
-                // Iniciar la secuencia de flashes
-                showNextFlash();
-            };
-
-            imagesToPreload.forEach(src => {
-                const img = new Image();
-                img.onload = img.onerror = function() {
-                    loadedCount++;
-                    const percentage = Math.round((loadedCount / totalImages) * 100);
-                    
-                    const progressBar = document.getElementById('loader-progress');
-                    const statusText = document.getElementById('loader-status');
-                    if (progressBar) progressBar.style.width = percentage + '%';
-                    if (statusText) statusText.innerText = 'CALIBRANDO IMÁGENES... ' + percentage + '%';
-
-                    if (loadedCount === totalImages) {
-                        // Una vez descargadas las 3 imágenes, disparamos la secuencia de intro
-                        setTimeout(playIntroSequence, 150);
-                    }
-                };
-                img.src = src;
-            });
-        })();
-    </script>
-
-    <!-- Navegación Superior -->
-    <nav>
-        <a href="#" class="logo">GOTO 10</a>
-        <!-- Botón Hamburguesa Móvil -->
-        <button type="button" class="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" onclick="toggleMobileMenu()">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </button>
-        <div class="nav-links" id="nav-links">
-            <a href="#inicio" onclick="closeMobileMenu()">Inicio</a>
-            <a href="#tiro" onclick="closeMobileMenu()">Trayectoria Deportiva</a>
-            <a href="#proyectos" onclick="closeMobileMenu()">Desarrollo Web</a>
-            <a href="#contacto" onclick="closeMobileMenu()">Contacto</a>
-        </div>
-    </nav>
-
-    <!-- Sección Hero (Inicio) -->
-    <header id="inicio" class="hero">
-        <!-- Retículas decorativas de precisión -->
-        <div class="reticle-box">
-            <div class="reticle-ring ring-1"></div>
-            <div class="reticle-ring ring-2"></div>
-            <div class="reticle-axis-x"></div>
-            <div class="reticle-axis-y"></div>
-        </div>
-        <div class="corner-mark top-left"></div>
-        <div class="corner-mark top-right"></div>
-        <div class="corner-mark bottom-left"></div>
-        <div class="corner-mark bottom-right"></div>
-
-        <div class="hero-content">
-            <div class="system-status">// DESARROLLO DE SOFTWARE & TIRO DE PRECISIÓN //</div>
-            <h1>Daniel Hornos</h1>
-            <h2>Desarrollador de Sistemas & Tirador Deportivo</h2>
-            <p>Enfoque técnico, análisis y constancia aplicados al desarrollo de software y a la práctica deportiva del tiro de precisión.</p>
-            <div class="hero-actions">
-                <a href="#tiro" class="cyber-btn">Ver Trayectoria</a>
-                <a href="#proyectos" class="cyber-btn accent">Ver Desarrollos</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Sección Tiro Deportivo (Timeline) -->
-    <section id="tiro">
-        <h2 class="section-title">Trayectoria en Tiro Deportivo</h2>
-        <div class="timeline-container">
-            <!-- Evento 1 (Más Reciente) -->
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">19/04/2026</div>
-                    <h3>Torneo San Fernando</h3>
-                    <h4>Fecha 2 "Malvinas Argentinas"</h4>
-                    <p>Excelente desempeño en la segunda fecha de la temporada del Campeonato Anual. Logros: <strong>Puesto 2 en Precisión Pistola 22LR 🥈 y Puesto 3 en Tiro Rápido 🥉</strong>.</p>
-                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/torneo-san-fernando-abril-2026.jpg" onclick="openLightbox(event, this)">VER CERTIFICADOS Y MEDALLAS</button>
-                </div>
-            </div>
-
-            <!-- Evento 2 -->
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">22/02/2026</div>
-                    <h3>Torneo San Fernando</h3>
-                    <h4>Apertura de Temporada</h4>
-                    <p>Inicio de la nueva temporada competitiva con solidez en el top 5. Logro: <strong>Puesto 1 de 20 (Podio 🥇)</strong>.</p>
-                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/torneo-san-fernando-2026.jpg" onclick="openLightbox(event, this)">VER REGISTRO DE PREMIACIÓN</button>
-                </div>
-            </div>
-
-            <!-- Evento 3 -->
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">20/12/2025</div>
-                    <h3>Torneo SITAS</h3>
-                    <h4>Doble Podio de Cierre</h4>
-                    <p>Cierre de año excepcional demostrando versatilidad en diferentes calibres ante 40 tiradores. Logro: <strong>Puesto 1 en 9mm 🥇 y Puesto 3 en .22LR 🥉</strong>.</p>
-                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/podio-sitas-2025.jpg" onclick="openLightbox(event, this)">VER PODIO E IMPACTOS</button>
-                </div>
-            </div>
-
-            <!-- Evento 4 -->
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">16/11/2025</div>
-                    <h3>Torneo San Fernando</h3>
-                    <h4>Mantenimiento de Nivel</h4>
-                    <p>Consolidación técnica en el circuito de San Fernando. Logro: <strong>Puesto 5 de 17</strong> participantes.</p>
-                </div>
-            </div>
-
-            <!-- Evento 5 (Oculto de Inicio) -->
-            <div class="timeline-item hidden-item collapsed">
-                <div class="timeline-content">
-                    <div class="timeline-date">17/08/2025</div>
-                    <h3>Torneo San Fernando</h3>
-                    <h4>Primer Podio Nacional</h4>
-                    <p>Excelente desempeño en precisión deportiva. Logro: <strong>Puesto 3 de 40 (Podio 🥉)</strong>.</p>
-                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/diploma-san-fernando-2025.jpg" onclick="openLightbox(event, this)">VER CERTIFICADO Y MEDALLA</button>
-                </div>
-            </div>
-
-            <!-- Evento 5 (Oculto de Inicio) -->
-            <div class="timeline-item hidden-item collapsed">
-                <div class="timeline-content">
-                    <div class="timeline-date">02/08/2025</div>
-                    <h3>Torneo Quilmes</h3>
-                    <h4>Circuito Metropolitano</h4>
-                    <p>Participación en el polígono de Quilmes mejorando la consistencia. Logro: <strong>Puesto 25 de 30</strong> participantes.</p>
-                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/diploma-quilmes-2025.jpg" onclick="openLightbox(event, this)">VER DIPLOMA DIGITAL</button>
-                </div>
-            </div>
-
-            <!-- Evento 6 (Oculto de Inicio) -->
-            <div class="timeline-item hidden-item collapsed">
-                <div class="timeline-content">
-                    <div class="timeline-date">25/05/2025</div>
-                    <h3>Torneo SITAS</h3>
-                    <h4>Debut Competitivo</h4>
-                    <p>Primer torneo oficial de precisión. Logro: <strong>Puesto 19 de 40</strong> participantes.</p>
-                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/diploma-sitas-debut-2025.jpg" onclick="openLightbox(event, this)">VER DIPLOMA DE DEBUT</button>
-                </div>
-            </div>
-
-            <!-- Evento 7 (Oculto de Inicio) -->
-            <div class="timeline-item hidden-item collapsed">
-                <div class="timeline-content">
-                    <div class="timeline-date">13/04/2025</div>
-                    <h3>Clasificación y Deporte</h3>
-                    <h4>Tiro Deportivo</h4>
-                    <p>Curso avanzado sobre modalidades deportivas. Incluyó un mini-torneo integrador entre estudiantes. Logro: <strong>Puesto 2 🥈</strong>.</p>
-                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/credencial-tiro-deportivo.jpg" onclick="openLightbox(event, this)">VER CREDENCIAL</button>
-                </div>
-            </div>
-
-            <!-- Evento 8 (Oculto de Inicio) -->
-            <div class="timeline-item hidden-item collapsed">
-                <div class="timeline-content">
-                    <div class="timeline-date">16/03/2025</div>
-                    <h3>Armamento</h3>
-                    <h4>Limpieza y Mantenimiento</h4>
-                    <p>Curso especializado en el mantenimiento de diferentes sistemas de armas, garantizando un funcionamiento seguro y confiable.</p>
-                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/credencial-mantenimiento-armas.jpg" onclick="openLightbox(event, this)">VER CREDENCIAL</button>
-                </div>
-            </div>
-
-            <!-- Evento 9 (Oculto de Inicio) -->
-            <div class="timeline-item hidden-item collapsed">
-                <div class="timeline-content">
-                    <div class="timeline-date">09/02/2025</div>
-                    <h3>Capacitación Inicial</h3>
-                    <h4>Introducción al Tiro</h4>
-                    <p>Inicios formales en la disciplina como tirador deportivo, completando la capacitación teórica y práctica inicial.</p>
-                    <button type="button" class="view-evidence-btn" data-img="assets/img/trayectoria/credencial-capacitacion-inicial.jpg" onclick="openLightbox(event, this)">VER CREDENCIAL</button>
-                </div>
-            </div>
-        </div>
-        <div class="timeline-toggle-container">
-            <button id="toggle-timeline-btn" class="cyber-btn" aria-expanded="false" aria-label="Mostrar u ocultar registro completo de trayectoria">// MOSTRAR REGISTRO COMPLETO //</button>
-        </div>
-    </section>
-
-    <!-- Sección Proyectos (Portafolio) -->
-    <section id="proyectos">
-        <h2 class="section-title">Desarrollos y Sistemas</h2>
-
-        <div class="projects-grid">
-
-            <!-- Proyecto SITAS -->
-            <div class="project-card">
-                <div class="project-img-container">
-                    <img src="assets/img/sitas-project.png" alt="Captura de pantalla de la plataforma Torneo SITAS" class="project-img">
-                </div>
-                <div class="project-info">
-                    <h3>Plataforma Torneo SITAS</h3>
-                    <p>Desarrollo integral ad honorem del portal oficial web para el torneo de tiro del club SITAS.
-                        Incluye gestión de inscripciones, publicación de reglamentos y sistema de ranking en tiempo
-                        real, operando bajo un subdominio personalizado.</p>
-                    <a href="https://torneo2026.goto10.com.ar" target="_blank" rel="noopener noreferrer" class="cyber-btn">Ir al Torneo 🎯</a>
-                </div>
-            </div>
-
-            <!-- Proyecto PYAT -->
-            <div class="project-card">
-                <div class="project-img-container">
-                    <img src="assets/img/pyat-project.png" alt="Captura de pantalla del Dashboard Ecosistema PYAT" class="project-img">
-                </div>
-                <div class="project-info">
-                    <h3>Ecosistema PYAT</h3>
-                    <p>Módulos de gestión empresarial corporativa desarrollados en Python. Integración de bases de datos
-                        centralizadas, facturación interactiva, seguimiento de cotizaciones y visualización modular de
-                        datos financieros.</p>
-                    <button type="button" class="cyber-btn" onclick="openPyatGallery()">Ver Galería Prev.</button>
-                </div>
-            </div>
-
-            <!-- Proyecto Cuervo Tattoo -->
-            <div class="project-card">
-                <div class="project-img-container">
-                    <img src="assets/img/cuervo-project.png" alt="Captura de pantalla del sitio Cuervo Tattoo Ink" class="project-img">
-                </div>
-                <div class="project-info">
-                    <h3>Cuervo Tattoo Ink</h3>
-                    <p>Diseño y desarrollo de sitio corporativo para "Cuervo Tattoo Ink", optimizado para destacar el portfolio artístico y facilitar el contacto directo.</p>
-                    <a href="https://cuervo-tattoo-ink.goto10.com.ar/" target="_blank" rel="noopener noreferrer" class="cyber-btn">Ver Sitio 🌐</a>
-                </div>
-            </div>
-
-            <!-- Proyecto Vittoria -->
-            <div class="project-card">
-                <div class="project-img-container">
-                    <img src="assets/img/vittoria-project.png" alt="Captura de pantalla del catálogo Vittoria Belleza" class="project-img">
-                </div>
-                <div class="project-info">
-                    <h3>Vittoria Belleza</h3>
-                    <p>Plataforma web premium y catálogo interactivo para la venta de productos de belleza y perfumería. Cuenta con carga dinámica de catálogos de temporada, diseño minimalista adaptado a dispositivos móviles e integración directa para pedidos vía WhatsApp.</p>
-                    <a href="https://vittoria.goto10.com.ar/" target="_blank" rel="noopener noreferrer" class="cyber-btn">Ver Sitio 🛍️</a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Sitios Amigos (Reubicado de forma segura fuera del Hero) -->
-    <div class="friendly-sites" style="padding: 2rem 8% 4rem 8%; text-align: center; background: var(--dark-bg);">
-        <h3 style="font-family: var(--font-heading); font-size: 0.75rem; color: var(--text-muted); letter-spacing: 3px; margin-bottom: 2rem; text-transform: uppercase;">Sitios Amigos</h3>
-        <div class="friends-wrapper" style="display: flex; justify-content: center; align-items: center; gap: 4rem; flex-wrap: wrap;">
-            <!-- Wildcat Academy -->
-            <div class="friend-card">
-                <a href="https://www.wildcat.com.ar/" target="_blank" rel="noopener noreferrer"
-                    title="Web Wildcat Academy">
-                    <img src="assets/img/LOGO_ACADEMIA_wildcat-letrasblancas.png" alt="Wildcat Academy"
-                        class="friend-logo">
-                </a>
-                <a href="https://www.instagram.com/academiawildcat" target="_blank" rel="noopener noreferrer"
-                    class="social-icon" aria-label="Instagram Wildcat Academy">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                    </svg>
-                </a>
-            </div>
-            <!-- Cuervo Tattoo Ink -->
-            <div class="friend-card">
-                <a href="https://cuervo-tattoo-ink.goto10.com.ar/" target="_blank" rel="noopener noreferrer"
-                    title="Web Cuervo Tattoo Ink">
-                    <img src="assets/img/Cuervo_tattoo_ink.jpeg" alt="Cuervo Tattoo Ink"
-                        class="friend-logo invert-logo rounded-logo">
-                </a>
-                <a href="https://www.instagram.com/cuervo_tattoo.ink/" target="_blank" rel="noopener noreferrer"
-                    class="social-icon" aria-label="Instagram Cuervo Tattoo Ink">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                    </svg>
-                </a>
-            </div>
-            <!-- Vittoria Belleza -->
-            <div class="friend-card">
-                <a href="https://vittoria.goto10.com.ar/" target="_blank" rel="noopener noreferrer"
-                    title="Web Vittoria Belleza">
-                    <img src="assets/img/vittoria-logo.png" alt="Vittoria Belleza"
-                        class="friend-logo rounded-logo">
-                </a>
-            </div>
-        </div>
+    <!-- Retículas decorativas de fondo -->
+    <div class="reticle-box">
+        <div class="reticle-ring ring-1"></div>
+        <div class="reticle-ring ring-2"></div>
+        <div class="reticle-axis-x"></div>
+        <div class="reticle-axis-y"></div>
     </div>
 
-    <!-- Sección Contacto (Formulario con n8n) -->
-    <section id="contacto">
-        <h2 class="section-title">Contacto</h2>
-        <div class="contact-container">
-            <div class="contact-card">
-                <div class="contact-header">
-                    <span class="system-status">// MÓDULO DE TRANSMISIÓN DIRECTA //</span>
-                    <p>Envíame un mensaje y el sistema lo enviará directamente a mis canales de comunicación.</p>
-                </div>
-                <form id="contact-form">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="contact-name">Nombre</label>
-                            <input type="text" id="contact-name" name="nombre" required placeholder="Tu nombre">
-                        </div>
-                        <div class="form-group">
-                            <label for="contact-email">Email</label>
-                            <input type="email" id="contact-email" name="email" required placeholder="tu@email.com">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-subject">Asunto</label>
-                        <input type="text" id="contact-subject" name="asunto" required placeholder="Motivo del mensaje">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-message">Mensaje</label>
-                        <textarea id="contact-message" name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
-                    </div>
-                    <button type="submit" class="cyber-btn accent" id="submit-btn">
-                        <span>// ENVIAR MENSAJE //</span>
-                    </button>
-                    <div id="form-feedback" class="form-feedback"></div>
-                </form>
+    <!-- Marcas de esquina tácticas -->
+    <div class="corner-mark top-left"></div>
+    <div class="corner-mark top-right"></div>
+    <div class="corner-mark bottom-left"></div>
+    <div class="corner-mark bottom-right"></div>
+
+    <!-- Panel Central -->
+    <main class="card-container">
+        <div class="brand-logo">
+            <span class="brand-dot"></span>
+            GOTO 10
+        </div>
+
+        <div class="system-badge">// SISTEMA EN MANTENIMIENTO TÁCTICO //</div>
+
+        <h1>SITIO EN CONSTRUCCIÓN</h1>
+        <div class="subtitle">Desarrollo de Software & Tiro Deportivo</div>
+
+        <p class="description">
+            Estamos optimizando y rediseñando nuestra plataforma digital para ofrecer una experiencia superior en desarrollo de sistemas, arquitecturas de software y gestión deportiva. Estaremos de regreso muy pronto.
+        </p>
+
+        <!-- Telemetría de Actualización -->
+        <div class="telemetry-box">
+            <div class="telemetry-header">
+                <span>ESTADO DE IMPLEMENTACIÓN</span>
+                <span class="telemetry-status">// ACTUALIZANDO //</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-bar"></div>
             </div>
         </div>
-    </section>
 
-    <!-- Pie de página -->
+        <!-- Botones de Acción / Contacto -->
+        <div class="actions-group">
+            <a href="mailto:daniel.hornos@goto10.com.ar" class="cyber-btn accent">
+                ✉ Contactar por Email
+            </a>
+            <a href="https://github.com/seguidurmiendo-rgb" target="_blank" rel="noopener noreferrer" class="cyber-btn">
+                GitHub ↗
+            </a>
+        </div>
+    </main>
+
     <footer>
-        <p>&copy; 2026 Daniel Hornos | GOTO 10. Todos los derechos reservados.</p>
-        <button type="button" class="private-link" aria-label="Acceso al área privada"
-            onclick="openAdminAuthModal()">
-            🔒
-        </button>
+        &copy; 2026 Daniel Hornos | GOTO 10. Todos los derechos reservados.
     </footer>
-
-    <!-- Modal Táctico Reutilizable para alertas e inputs -->
-    <div id="cyber-modal" class="lightbox" onclick="closeCyberModal()" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="cyber-modal-title">
-        <div class="contact-card modal-content" onclick="event.stopPropagation()">
-            <button type="button" class="lightbox-close" aria-label="Cerrar ventana" onclick="closeCyberModal()">&times;</button>
-            <div id="modal-body-content">
-                <!-- Se inyecta dinámicamente el contenido -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Lightbox para visualización de evidencias -->
-    <div id="lightbox-modal" class="lightbox" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="lightbox-caption">
-        <button type="button" class="lightbox-close" aria-label="Cerrar visor" onclick="closeLightbox()">&times;</button>
-        <img class="lightbox-content" id="lightbox-img" alt="">
-        <div id="lightbox-caption"></div>
-    </div>
-
-    <!-- Lógica de interactividad -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // 1. Control del Timeline Collapsible
-            const toggleBtn = document.getElementById('toggle-timeline-btn');
-            const hiddenItems = document.querySelectorAll('.timeline-item.hidden-item');
-
-            if (toggleBtn && hiddenItems.length > 0) {
-                toggleBtn.addEventListener('click', () => {
-                    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-                    
-                    hiddenItems.forEach(item => {
-                        if (isExpanded) {
-                            item.classList.add('collapsed');
-                        } else {
-                            item.classList.remove('collapsed');
-                        }
-                    });
-
-                    if (isExpanded) {
-                        toggleBtn.innerHTML = '// MOSTRAR REGISTRO COMPLETO //';
-                        toggleBtn.setAttribute('aria-expanded', 'false');
-                        // Desplazar la vista suavemente de vuelta a la cabecera de la sección
-                        document.getElementById('tiro').scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                        toggleBtn.innerHTML = '// COLAPSAR HISTORIAL //';
-                        toggleBtn.setAttribute('aria-expanded', 'true');
-                    }
-                });
-            }
-
-            // 2. Control del Lightbox (Con Focus Trap y Accesibilidad)
-            const lightbox = document.getElementById('lightbox-modal');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const lightboxCaption = document.getElementById('lightbox-caption');
-            let lastActiveElement = null;
-
-            window.openLightbox = function(event, element) {
-                event.preventDefault();
-                event.stopPropagation();
-                lastActiveElement = document.activeElement;
-                const imgSrc = element.getAttribute('data-img');
-                const imgCaption = element.textContent || "Evidencia de logro";
-                const cleanCaption = imgCaption.replace('[', '').replace(']', '').trim();
-                
-                if (lightbox && lightboxImg) {
-                    lightboxImg.src = imgSrc;
-                    lightboxImg.alt = cleanCaption;
-                    if (lightboxCaption) {
-                        lightboxCaption.innerHTML = cleanCaption;
-                    }
-                    lightbox.classList.add('active');
-                    lightbox.setAttribute('aria-hidden', 'false');
-                    
-                    // Foco al botón de cerrar
-                    const closeBtn = lightbox.querySelector('.lightbox-close');
-                    if (closeBtn) closeBtn.focus();
-                }
-            };
-
-            window.closeLightbox = function() {
-                if (lightbox) {
-                    lightbox.classList.remove('active');
-                    lightbox.setAttribute('aria-hidden', 'true');
-                    if (lastActiveElement) {
-                        lastActiveElement.focus();
-                    }
-                }
-            };
-
-            // 3. Control del Modal Táctico Reutilizable (#cyber-modal)
-            const cyberModal = document.getElementById('cyber-modal');
-            const cyberBody = document.getElementById('modal-body-content');
-            let lastActiveCyberElement = null;
-
-            window.openCyberModal = function(htmlContent) {
-                lastActiveCyberElement = document.activeElement;
-                if(cyberModal && cyberBody) {
-                    cyberBody.innerHTML = htmlContent;
-                    cyberModal.classList.add('active');
-                    cyberModal.setAttribute('aria-hidden', 'false');
-                    
-                    // Intentar enfocar el primer elemento interactivo
-                    const closeBtn = cyberModal.querySelector('.lightbox-close');
-                    if (closeBtn) closeBtn.focus();
-                }
-            };
-
-            window.closeCyberModal = function() {
-                if (cyberModal) {
-                    cyberModal.classList.remove('active');
-                    cyberModal.setAttribute('aria-hidden', 'true');
-                    if (lastActiveCyberElement) {
-                        lastActiveCyberElement.focus();
-                    }
-                }
-            };
-
-            // Trampa de foco (Focus Trap) para ambos modales y Escape
-            document.addEventListener('keydown', (e) => {
-                const activeModal = [lightbox, cyberModal].find(m => m && m.classList.contains('active'));
-                if (!activeModal) return;
-
-                if (e.key === 'Escape') {
-                    if (activeModal === lightbox) closeLightbox();
-                    if (activeModal === cyberModal) closeCyberModal();
-                    return;
-                }
-
-                if (e.key === 'Tab') {
-                    const focusableElements = activeModal.querySelectorAll('button, input, textarea, a, [tabindex="0"]');
-                    if (focusableElements.length === 0) return;
-                    const firstElement = focusableElements[0];
-                    const lastElement = focusableElements[focusableElements.length - 1];
-
-                    if (e.shiftKey) { // Shift + Tab
-                        if (document.activeElement === firstElement) {
-                            lastElement.focus();
-                            e.preventDefault();
-                        }
-                    } else { // Tab
-                        if (document.activeElement === lastElement) {
-                            firstElement.focus();
-                            e.preventDefault();
-                        }
-                    }
-                }
-            });
-
-            // Lógica específica para modal de PYAT
-            window.openPyatGallery = function() {
-                openCyberModal(`
-                    <span class="system-status" id="cyber-modal-title">// ACCESO RESTRINGIDO //</span>
-                    <h3 style="margin: 1.5rem 0 1rem 0; font-family: var(--font-heading);">Ecosistema PYAT</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.6;">
-                        Este ecosistema es de uso interno corporativo y contiene información financiera sensible. A continuación se presentan capturas estáticas autorizadas para el portfolio:
-                    </p>
-                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
-                        <div style="border: 1px dashed var(--secondary); padding: 1.5rem 1rem; border-radius: 4px; color: var(--secondary); font-family: var(--font-heading); font-size: 0.8rem; background: rgba(0, 176, 255, 0.02); text-align: center; flex: 1; min-width: 140px;">
-                            [ MÓDULO VENTAS ]
-                        </div>
-                        <div style="border: 1px dashed var(--secondary); padding: 1.5rem 1rem; border-radius: 4px; color: var(--secondary); font-family: var(--font-heading); font-size: 0.8rem; background: rgba(0, 176, 255, 0.02); text-align: center; flex: 1; min-width: 140px;">
-                            [ INDICADORES FINAN ]
-                        </div>
-                    </div>
-                    <button type="button" class="cyber-btn accent" onclick="closeCyberModal()" style="width: 100%;">// ENTENDIDO //</button>
-                `);
-            };
-
-            // Lógica de Autenticación de Administrador
-            window.openAdminAuthModal = function() {
-                openCyberModal(`
-                    <span class="system-status" id="cyber-modal-title">// TERMINAL DE AUTENTICACIÓN //</span>
-                    <h3 style="margin: 1.5rem 0 1rem 0; font-family: var(--font-heading);">ÁREA DE ACCESO PRIVADO</h3>
-                    <div class="form-group" style="margin-bottom: 1.5rem; text-align: left;">
-                        <label for="admin-pass-input" style="font-family: var(--font-heading); font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">Clave de Seguridad</label>
-                        <input type="password" id="admin-pass-input" placeholder="••••••••" style="width: 100%; margin-top: 0.5rem;" required>
-                        <div id="admin-auth-error" style="color: var(--accent); font-size: 0.8rem; margin-top: 0.5rem; font-family: var(--font-heading); display: none;">// ACCESO DENEGADO // CLAVE INCORRECTA //</div>
-                    </div>
-                    <button type="button" class="cyber-btn accent" onclick="validarAccesoPrivado()" style="width: 100%; margin-bottom: 0.5rem;">// ACCEDER //</button>
-                    <button type="button" class="cyber-btn" onclick="closeCyberModal()" style="width: 100%;">CANCELAR</button>
-                `);
-                
-                // Enfocar el input de clave directamente
-                setTimeout(() => {
-                    const passInput = document.getElementById('admin-pass-input');
-                    if (passInput) {
-                        passInput.focus();
-                        passInput.addEventListener('keydown', (e) => {
-                            if (e.key === 'Enter') {
-                                validarAccesoPrivado();
-                            }
-                        });
-                    }
-                }, 100);
-            };
-
-            window.validarAccesoPrivado = function() {
-                const passInput = document.getElementById('admin-pass-input');
-                const errDiv = document.getElementById('admin-auth-error');
-                if (passInput) {
-                    const value = passInput.value;
-                    if (value === "goto10admin") {
-                        // Entrada autorizada (simulada)
-                        closeCyberModal();
-                        setTimeout(() => alert('Modo Administrador Inicializado (Demo)'), 200);
-                    } else {
-                        if (errDiv) errDiv.style.display = 'block';
-                        passInput.value = '';
-                        passInput.focus();
-                    }
-                }
-            };
-
-            // 4. Control de Menú Hamburguesa Móvil
-            window.toggleMobileMenu = function() {
-                const toggleBtn = document.querySelector('.menu-toggle');
-                const navLinks = document.getElementById('nav-links');
-                if (toggleBtn && navLinks) {
-                    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-                    toggleBtn.setAttribute('aria-expanded', !isExpanded);
-                    toggleBtn.classList.toggle('active');
-                    navLinks.classList.toggle('active');
-                }
-            };
-
-            window.closeMobileMenu = function() {
-                const toggleBtn = document.querySelector('.menu-toggle');
-                const navLinks = document.getElementById('nav-links');
-                if (toggleBtn && navLinks && toggleBtn.classList.contains('active')) {
-                    toggleBtn.setAttribute('aria-expanded', 'false');
-                    toggleBtn.classList.remove('active');
-                    navLinks.classList.remove('active');
-                }
-            };
-
-            // 5. Control de la barra de navegación (Opacidad al scroll)
-            const nav = document.querySelector('nav');
-            
-            const handleScroll = () => {
-                if (window.scrollY > 100) {
-                    nav.classList.add('nav-visible');
-                } else {
-                    nav.classList.remove('nav-visible');
-                }
-            };
-            
-            window.addEventListener('scroll', handleScroll, { passive: true });
-            handleScroll();
-
-            // 6. Envío del Formulario de Contacto a n8n
-            const contactForm = document.getElementById('contact-form');
-            const formFeedback = document.getElementById('form-feedback');
-            const submitBtn = document.getElementById('submit-btn');
-
-            if (contactForm) {
-                contactForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    
-                    const N8N_WEBHOOK_URL = 'https://n8n.goto10.com.ar/webhook/contacto';
-                    
-                    const formData = {
-                        nombre: document.getElementById('contact-name').value,
-                        email: document.getElementById('contact-email').value,
-                        asunto: document.getElementById('contact-subject').value,
-                        mensaje: document.getElementById('contact-message').value
-                    };
-
-                    formFeedback.className = 'form-feedback loading';
-                    formFeedback.innerText = '// TRANSMITIENDO DATOS... //';
-                    formFeedback.style.opacity = '1';
-                    submitBtn.disabled = true;
-                    submitBtn.style.opacity = '0.5';
-
-                    try {
-                        const response = await fetch(N8N_WEBHOOK_URL, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(formData)
-                        });
-
-                        if (response.ok) {
-                            formFeedback.className = 'form-feedback success';
-                            formFeedback.innerText = '// MENSAJE ENVIADO CON ÉXITO //';
-                            contactForm.reset();
-                        } else {
-                            throw new Error('Fallo en el servidor n8n');
-                        }
-                    } catch (error) {
-                        console.error('Error al enviar formulario:', error);
-                        formFeedback.className = 'form-feedback error';
-                        formFeedback.innerText = '// FALLO EN LA TRANSMISIÓN // INTENTAR MÁS TARDE //';
-                    } finally {
-                        submitBtn.disabled = false;
-                        submitBtn.style.opacity = '1';
-                        setTimeout(() => {
-                            formFeedback.style.opacity = '0';
-                        }, 5000);
-                    }
-                });
-            }
-
-            // 7. Ping de Notificación de Visita al cargar la página
-            const sendVisitaNotification = async () => {
-                const N8N_VISITA_URL = 'https://n8n.goto10.com.ar/webhook/visita';
-                
-                let locationData = { pais: 'Desconocido', ciudad: 'Desconocida' };
-                try {
-                    const ipResponse = await fetch('https://ipapi.co/json/');
-                    if (ipResponse.ok) {
-                        const ipData = await ipResponse.json();
-                        locationData.pais = ipData.country_name || 'Desconocido';
-                        locationData.ciudad = ipData.city || 'Desconocida';
-                    }
-                } catch (e) {
-                    console.log('No se pudo determinar la ubicación:', e);
-                }
-
-                let dispositivo = 'Escritorio';
-                if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
-                    dispositivo = 'Móvil';
-                }
-
-                try {
-                    await fetch(N8N_VISITA_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            tipo: 'visita',
-                            dispositivo: dispositivo,
-                            pais: locationData.pais,
-                            ciudad: locationData.ciudad,
-                            url: window.location.href,
-                            timestamp: new Date().toISOString()
-                        })
-                    });
-                } catch (err) {
-                    console.log('Ping de visita fallido (n8n offline):', err);
-                }
-            };
-
-            setTimeout(sendVisitaNotification, 1200);
-
-
-        });
-    </script>
 
 </body>
 
